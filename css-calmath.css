@@ -1,0 +1,12 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+#math_world_awal_atas{
+	font-size: 50px;
+	border-bottom: 3px solid blue;
+}
+.math_world_box_div{
+	border: 1px dotted black;
+}
