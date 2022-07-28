@@ -11,7 +11,7 @@ function hasilfaktor(){
 	var hasilaxc = a * c;		
 
 	if (hasilaxc < 0) {
-    for (var x1 = hasilaxc; x1 <= -hasilaxc; x1 += 1) {
+    for (var x1 = hasilaxc; x1 <= -hasilaxc + 1; x1++) {
  		var x2 =  hasilaxc / x1;
     	if (hasilaxc / x1 == x2 && x2 + x1 == b) {
 			hasil.innerHTML = 
@@ -26,12 +26,14 @@ function hasilfaktor(){
 			 (x + (${x2}))(x + (${x1})) = 0<br>
 			 x + (${x2}) = 0 ||| x + (${x1}) = 0<br>
 			 x = ${-x2} ||| x = ${-x1}`
-    	}
-    	console.log(x1)
+    	} else if (x1 == -hasilaxc + 1) {
+		alert("perhitungan tidak ditemukan, gunakan rumus ABC!")	
+	}
+	    
     }
     }
     if (hasilaxc > 0) {
-    for (var x1 = -hasilaxc; x1 <= hasilaxc; x1 += 1) {
+    for (var x1 = -hasilaxc; x1 <= hasilaxc + 1; x1++) {
  		var x2 =  hasilaxc / x1;
     	if (hasilaxc / x1 == x2 && x2 + x1 == b) {
 			hasil.innerHTML = 
@@ -46,13 +48,15 @@ function hasilfaktor(){
 			 (x + (${x2}))(x + (${x1})) = 0<br>
 			 x + (${x2}) = 0 ||| x + (${x1}) = 0<br>
 			 x = ${-x2} ||| x = ${-x1}`
-    	}
+    	} else if (x1 == hasilaxc + 1) {
+		alert("perhitungan tidak ditemukan, gunakan rumus ABC!")
+	}
     }
     }
     if (hasilaxc == 0) {
     	var x1 = b;
     	var x2 = 0;
-    	hasil.innerHTML = 
+    	return hasil.innerHTML = 
 			`ax^2 + bx + c = 0<br>
 			a = ${a} , b = ${b} , c = ${c}<br>
 			*rumus pemfaktoran =<br>
@@ -65,5 +69,4 @@ function hasilfaktor(){
 			 x + (${x2}) = 0 ||| x + (${x1}) = 0<br>
 			 x = ${-x2} ||| x = ${-x1}`
     }
-
 }
