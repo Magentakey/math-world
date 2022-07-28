@@ -14,7 +14,7 @@ function hasilfaktor(){
     for (var x1 = hasilaxc; x1 <= -hasilaxc + 1; x1++) {
  		var x2 =  hasilaxc / x1;
     	if (hasilaxc / x1 == x2 && x2 + x1 == b) {
-			hasil.innerHTML = 
+			return hasil.innerHTML = 
 			`ax^2 + bx + c = 0 <br>
 			a = ${a} , b = ${b} , c = ${c}<br>
 			*rumus pemfaktoran =<br>
@@ -36,7 +36,7 @@ function hasilfaktor(){
     for (var x1 = -hasilaxc; x1 <= hasilaxc + 1; x1++) {
  		var x2 =  hasilaxc / x1;
     	if (hasilaxc / x1 == x2 && x2 + x1 == b) {
-			hasil.innerHTML = 
+			return hasil.innerHTML = 
 			`ax^2 + bx + c = 0<br>
 			a = ${a} , b = ${b} , c = ${c}<br>
 			*rumus pemfaktoran =<br>
