@@ -10,62 +10,74 @@ function hasilfaktor_box2(){
 	b_box2 = Number(inputb_box2.value);
 	c_box2 = Number(inputc_box2.value);
 	diskriminan = (b_box2 ** 2) + (-4 * a_box2 * c_box2);
+	khususmin_diskriminan = -((b_box2 ** 2) + (-4 * a_box2 * c_box2));
 	akar_diskriminan =  Math.sqrt((b_box2 ** 2) + (-4 * a_box2 * c_box2));
     khususmin_akar_diskriminan = Math.sqrt(-((b_box2 ** 2) + (-4 * a_box2 * c_box2)));
 
 if (diskriminan > 0) {
-	return hasil_box2.innerHTML = 
-`
-x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
-x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2}) + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; ${akar_diskriminan}) / ${2 * a_box2}<br>
-<br>
-x<sub>1</sub> = (${-b_box2} + ${akar_diskriminan}) / ${2 * a_box2}<br>
-x<sub>1</sub> = ${-b_box2 + akar_diskriminan} / ${2 * a_box2}<br>
-x<sub>1</sub> = ${(-b_box2 + akar_diskriminan) / (2 * a_box2)}<br>
-<br>
-x<sub>2</sub> = (${-b_box2} - ${akar_diskriminan}) / ${2 * a_box2}<br>
-x<sub>2</sub> = ${-b_box2 - akar_diskriminan} / ${2 * a_box2}<br>
-x<sub>2</sub> = ${(-b_box2 - akar_diskriminan) / (2 * a_box2)}<br>
-`
-}else if (diskriminan == 0){
-	return hasil_box2.innerHTML = 
-`
-x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
-x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; ${akar_diskriminan}) / ${2 * a_box2}   <<<  hanya memiliki 1 nilai<br>
-x = ${-b_box2} / ${2 * a_box2}<br>
-x = ${-b_box2 / (2 * a_box2)}<br>
-`
-}else if (diskriminan < 0){
-	return hasil_box2.innerHTML = 
-`
-x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
-x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
-x<sub>1,2</sub> = (${-b_box2} &#177; ${khususmin_akar_diskriminan}i) / ${2 * a_box2} <<< tidak ada penyelesaian<br>
-`}}
-// }else if (diskriminan % akar_diskriminan.toFixed() != 0) {
-// 	return hasil_box2.innerHTML = 
-// `
-// x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
-// x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
-// x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
-// x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
-// <br>
-// x<sub>1</sub> = (${-b_box2} + &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
-// <br>
-// x<sub>2</sub> = (${-b_box2} - &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
-// `
-// }
-// }
-
-// ongoing
+	if (diskriminan % akar_diskriminan == 0){
+		return hasil_box2.innerHTML = 
+	`
+	x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
+	x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2}) + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; ${akar_diskriminan}) / ${2 * a_box2}<br>
+	<br>
+	x<sub>1</sub> = (${-b_box2} + ${akar_diskriminan}) / ${2 * a_box2}<br>
+	x<sub>1</sub> = ${-b_box2 + akar_diskriminan} / ${2 * a_box2}<br>
+	x<sub>1</sub> = ${(-b_box2 + akar_diskriminan) / (2 * a_box2)}<br>
+	<br>
+	x<sub>2</sub> = (${-b_box2} - ${akar_diskriminan}) / ${2 * a_box2}<br>
+	x<sub>2</sub> = ${-b_box2 - akar_diskriminan} / ${2 * a_box2}<br>
+	x<sub>2</sub> = ${(-b_box2 - akar_diskriminan) / (2 * a_box2)}<br>
+	`}
+	else if (diskriminan % akar_diskriminan != 0) {
+			return hasil_box2.innerHTML = 
+	`
+	x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
+	x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
+	<br>
+	x<sub>1</sub> = (${-b_box2} + &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
+	<br>
+	x<sub>2</sub> = (${-b_box2} - &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
+	`
+	}
+}
+else if (diskriminan == 0){
+		return hasil_box2.innerHTML = 
+	`
+	x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
+	x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; ${akar_diskriminan}) / ${2 * a_box2}   <<<  hanya memiliki 1 nilai<br>
+	x = ${-b_box2} / ${2 * a_box2}<br>
+	x = ${-b_box2 / (2 * a_box2)}<br>
+	`
+}
+else if (diskriminan < 0){
+	if (khususmin_diskriminan % khususmin_akar_diskriminan == 0) {
+		return hasil_box2.innerHTML = 
+	`
+	x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
+	x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; ${khususmin_akar_diskriminan}i) / ${2 * a_box2} <<< tidak ada penyelesaian<br>
+	`}
+	else if(khususmin_diskriminan % khususmin_akar_diskriminan != 0 ){
+			return hasil_box2.innerHTML = 
+	`
+	x<sub>1,2</sub> = (-b &#177; &#8730; (b<sup>2</sup> - 4ac)) / 2a<br>
+	x<sub>1,2</sub> = (-(${b_box2}) &#177; &#8730; ((${b_box2})<sup>2</sup> - 4.(${a_box2}).(${c_box2}))) / 2.(${a_box2})<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${b_box2 ** 2} + (${-4 * a_box2 * c_box2}))) / ${2 * a_box2}<br>
+	x<sub>1,2</sub> = (${-b_box2} &#177; &#8730; (${diskriminan})) / ${2 * a_box2} <<< tidak ada penyelesaian<br>
+	`
+	}
+}}
 ////////////////////////////////////////////////////////////////
 
 var hasil =  document.getElementById('hasilapoekrpwoarkpa');
