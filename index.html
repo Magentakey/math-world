@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="css_calmath.css">
 	<script type="text/javascript" src="js_calmath.js" defer=""></script>
+	<!-- mathjax library -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 	<center>
@@ -38,10 +41,18 @@
 		<button type="button" onclick="hasilfaktor_box2()">hasil</button>
 		<p id="hasil_box2"></p>
 	</div>
-	<div class="math_world_box_div">
-		<h3>hasil jumlah dan kali persamaan kuadrat</h3>
-		<!-- ongoging -->
-		<!-- 3 input banyak function -->
+	<div class="math_world_box_div"> <!-- box3 >>> hasil jumlah dan kali persamaan kuadrat -->
+		<h3 id="box3">hasil jumlah dan kali persamaan kuadrat</h3>
+		<input id="inputa_box3" autocomplete="off" type="text" name="inputa" placeholder="a">
+		<input id="inputb_box3" autocomplete="off" type="text" name="inputb" placeholder="b">
+		<input id="inputc_box3" autocomplete="off" type="text" name="inputc" placeholder="c">
+		<br>
+		<button onclick="hasil_satu_box3()">x1+x2</button>
+		<button onclick="hasil_dua_box3()">x1.x2</button>
+		<button onclick="hasil_tiga_box3()">x1<sup>2</sup>+x2<sup>2</sup></button>
+		<button onclick="hasil_empat_box3()">(1/x1)+(1/x2)</button>
+		<button onclick="hasil_lima_box3()">(x1/x2)+(x2/x1)</button>
+		<p id="hasil_box3"></p>
 	</div>
 </body>
 </html>
