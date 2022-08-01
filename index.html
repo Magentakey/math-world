@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="js_calmath.js" defer=""></script>
 	<!-- mathjax library -->
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 	<center>
@@ -47,11 +47,11 @@
 		<input id="inputb_box3" autocomplete="off" type="text" name="inputb" placeholder="b">
 		<input id="inputc_box3" autocomplete="off" type="text" name="inputc" placeholder="c">
 		<br>
-		<button onclick="hasil_satu_box3()">x1+x2</button>
-		<button onclick="hasil_dua_box3()">x1.x2</button>
-		<button onclick="hasil_tiga_box3()">x1<sup>2</sup>+x2<sup>2</sup></button>
-		<button onclick="hasil_empat_box3()">(1/x1)+(1/x2)</button>
-		<button onclick="hasil_lima_box3()">(x1/x2)+(x2/x1)</button>
+		<button onclick="hasil_satu_box3()">\( x1+x2 \)</button>
+		<button onclick="hasil_dua_box3()">\( x1.x2 \)</button>
+		<button onclick="hasil_tiga_box3()">\( x1^2+x2^2 \)</button>
+		<button onclick="hasil_empat_box3()">\( \frac{1}{x1} + \frac{1}{x2} \)</button>
+		<button onclick="hasil_lima_box3()">\( \frac{x1}{x2}+\frac{x2}{x1} \)</button>
 		<p id="hasil_box3"></p>
 	</div>
 </body>
