@@ -20,9 +20,12 @@
 		</p>
 		<a href="#box1">pemfaktoran</a> - 
 		<a href="#box2">rumus abc</a>
-		<hr>
+		<br><hr><br>
 		<p>hasil jumlah dan kali persamaan kuadrat</p>
 		<a href="#box3">x1+x2 , x1.x2 , x1^2+x2^2 dll</a>
+		<br><hr><br>
+		<p>menentukan persamaan kuadrat-dari akar akarnya</p>
+		<a href="#box4">cara 1 dan 2</a>
 	</div>
 
 	<div class="math_world_box_div"> <!-- box1 >>> mencari akar2 dengan persamaan kuadrat -->
@@ -53,6 +56,54 @@
 		<button onclick="hasil_empat_box3()">\( \frac{1}{x1} + \frac{1}{x2} \)</button>
 		<button onclick="hasil_lima_box3()">\( \frac{x1}{x2}+\frac{x2}{x1} \)</button>
 		<p id="hasil_box3"></p>
+	</div>
+	<div class="math_world_box_div">  <!-- box4 >>> menentukan persamaan kuadrat dari akar-akar -->
+		<h3 id="box4">menentukan persamaan kuadrat</h3>
+		<div style="border: 2px dotted black;display: flex;">
+		
+		<!-- default -->
+		<input type="text" placeholder="x1" autocomplete="off" id="inputx1_box4" name="inputx">
+		<input type="text" placeholder="x2" autocomplete="off" id="inputx2_box4" name="inputx">
+		<button id="btn_box4" type="button" onclick="cara1_box4()">hasil-cara 1</button>
+		<button id="btn2_box4" type="button" onclick="cara2_box4()">hasuk-cara 2</button>
+
+		<!-- 1 pecahan -->
+		<input id="inputx1_box4_pecahan1" type="text" name="inputx" placeholder="x1" autocomplete="off" style="width: 214px;text-align: center;">
+		<div style="display: flex;">
+			<input id="inputx2_box4_pecahan1_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x2-pembilang" style="width: 107px; height: 34px;text-align: center;">
+			<span id="per_nya_pecahan1_box4" style="font-size: 23px;">per</span>
+			<input id="inputx2_box4_pecahan1_penyebut" autocomplete="off" placeholder="x2-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+		</div>
+		<button id="btn_box4_pecahan1" type="button" onclick="cara1_box4_1pecahan()">hasil-cara 1</button>
+		<button id="btn2_box4_pecahan1" type="button" onclick="cara2_box4_1pecahan()">hasil-cara 2</button>
+
+		<!-- 2 pecahan -->
+		<div style="display: flex;">
+			<input id="inputx1_box4_pecahan2_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x1-pembilang" style="width: 107px; height: 34px;text-align: center;">
+			<span id="per_nya_pecahan2_box4" style="font-size: 23px;">per</span>
+			<input id="inputx1_box4_pecahan2_penyebut" autocomplete="off" placeholder="x1-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+		</div>
+		<div style="display: flex;">
+			<input id="inputx2_box4_pecahan2_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x2-pembilang" style="width: 107px; height: 34px;text-align: center;">
+			<span id="per2_nya_pecahan2_box4" style="font-size: 23px;">per</span>
+			<input id="inputx2_box4_pecahan2_penyebut" autocomplete="off" placeholder="x2-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+		</div>
+		<button id="btn_box4_pecahan2" type="button" onclick="cara1_box4_2pecahan()">hasil-cara 1</button>
+		<button id="btn2_box4_pecahan2" type="button" onclick="cara2_box4_2pecahan()">hasil-cara 2</button>
+
+		<!-- tipe input/masukan -->
+		<div style="border: 3px solid black;display: flex;flex-direction: row;">
+			<button type="button" onclick="default_box4()">default</button>
+			<button type="button" onclick="pecahan1_box4()">1 pecahan</button>
+			<button type="button" onclick="pecahan2_box4()">2 pecahan</button>
+		</div>
+		</div>
+		<p id="hasil_box4"></p>
+	</div>
+	<div class="math_world_box_div">
+		<h3 id="box5">fungsi kuadrat</h3>
+		<!-- ongoing -->
+		<!-- grafik??? -->
 	</div>
 </body>
 </html>
