@@ -1,3 +1,211 @@
+
+////////////////////////////////////////////////////////////////
+// box 4
+var hasil_box4 = document.getElementById("hasil_box4");
+// default
+var x1_box4 = document.getElementById("inputx1_box4");
+var x2_box4 = document.getElementById("inputx2_box4");
+var btn_box4 = document.getElementById("btn_box4");
+var btn2_box4 = document.getElementById("btn2_box4");
+// 1 pecahan
+var x1_box4_pecahan1 = document.getElementById("inputx1_box4_pecahan1");
+var x2_box4_pecahan1_pembilang = document.getElementById("inputx2_box4_pecahan1_pembilang");
+var x2_box4_pecahan1_penyebut = document.getElementById("inputx2_box4_pecahan1_penyebut");
+var btn_box4_pecahan1 = document.getElementById("btn_box4_pecahan1");
+var btn2_box4_pecahan1 = document.getElementById("btn2_box4_pecahan1");
+var per_nya_pecahan1_box4 = document.getElementById("per_nya_pecahan1_box4");
+// 2 pecahan
+var x1_box4_pecahan2_pembilang = document.getElementById("inputx1_box4_pecahan2_pembilang");
+var x1_box4_pecahan2_penyebut = document.getElementById("inputx1_box4_pecahan2_penyebut");
+var x2_box4_pecahan2_pembilang = document.getElementById("inputx2_box4_pecahan2_pembilang");
+var x2_box4_pecahan2_penyebut = document.getElementById("inputx2_box4_pecahan2_penyebut");
+var btn_box4_pecahan2 = document.getElementById("btn_box4_pecahan2");
+var btn2_box4_pecahan2 = document.getElementById("btn2_box4_pecahan2");
+var per_nya_pecahan2_box4 = document.getElementById("per_nya_pecahan2_box4");
+var per2_nya_pecahan2_box4 = document.getElementById("per2_nya_pecahan2_box4");
+// default
+x1_box4.hidden = false;
+x2_box4.hidden = false;
+btn_box4.hidden = false;
+btn2_box4.hidden = false;
+x1_box4_pecahan1.hidden = true;
+x2_box4_pecahan1_pembilang.hidden = true;
+x2_box4_pecahan1_penyebut.hidden = true;
+btn_box4_pecahan1.hidden = true;
+btn2_box4_pecahan1.hidden = true;
+per_nya_pecahan1_box4.hidden = true;
+x1_box4_pecahan2_pembilang.hidden = true;
+x1_box4_pecahan2_penyebut.hidden = true;
+x2_box4_pecahan2_pembilang.hidden = true;
+x2_box4_pecahan2_penyebut.hidden = true;
+btn_box4_pecahan2.hidden = true;
+btn2_box4_pecahan2.hidden = true;
+per_nya_pecahan2_box4.hidden = true;
+per2_nya_pecahan2_box4.hidden = true;
+
+function default_box4(){
+	x1_box4.hidden = false;
+	x2_box4.hidden = false;
+	btn_box4.hidden = false;
+	btn2_box4.hidden = false;
+	x1_box4_pecahan1.hidden = true;
+	x2_box4_pecahan1_pembilang.hidden = true;
+	x2_box4_pecahan1_penyebut.hidden = true;
+	btn_box4_pecahan1.hidden = true;
+	btn2_box4_pecahan1.hidden = true;
+	per_nya_pecahan1_box4.hidden = true;
+	x1_box4_pecahan2_pembilang.hidden = true;
+	x1_box4_pecahan2_penyebut.hidden = true;
+	x2_box4_pecahan2_pembilang.hidden = true;
+	x2_box4_pecahan2_penyebut.hidden = true;
+	btn_box4_pecahan2.hidden = true;
+	btn2_box4_pecahan2.hidden = true;
+	per_nya_pecahan2_box4.hidden = true;
+	per2_nya_pecahan2_box4.hidden = true;
+	hasil_box4.innerHTML = "";
+}
+function pecahan1_box4(){
+	x1_box4.hidden = true;
+	x2_box4.hidden = true;
+	btn_box4.hidden = true;
+	btn2_box4.hidden = true;
+	x1_box4_pecahan1.hidden = false;
+	x2_box4_pecahan1_pembilang.hidden = false;
+	x2_box4_pecahan1_penyebut.hidden = false;
+	btn_box4_pecahan1.hidden = false;
+	btn2_box4_pecahan1.hidden = false;
+	per_nya_pecahan1_box4.hidden = false;
+	x1_box4_pecahan2_pembilang.hidden = true;
+	x1_box4_pecahan2_penyebut.hidden = true;
+	x2_box4_pecahan2_pembilang.hidden = true;
+	x2_box4_pecahan2_penyebut.hidden = true;
+	btn_box4_pecahan2.hidden = true;
+	btn2_box4_pecahan2.hidden = true;
+	per_nya_pecahan2_box4.hidden = true;
+	per2_nya_pecahan2_box4.hidden = true;
+	hasil_box4.innerHTML = "";
+}
+function pecahan2_box4(){
+	x1_box4.hidden = true;
+	x2_box4.hidden = true;
+	btn_box4.hidden = true;
+	btn2_box4.hidden = true;
+	x1_box4_pecahan1.hidden = true;
+	x2_box4_pecahan1_pembilang.hidden = true;
+	x2_box4_pecahan1_penyebut.hidden = true;
+	btn_box4_pecahan1.hidden = true;
+	btn2_box4_pecahan1.hidden = true;
+	per_nya_pecahan1_box4.hidden = true;
+	x1_box4_pecahan2_pembilang.hidden = false;
+	x1_box4_pecahan2_penyebut.hidden = false;
+	x2_box4_pecahan2_pembilang.hidden = false;
+	x2_box4_pecahan2_penyebut.hidden = false;
+	btn_box4_pecahan2.hidden = false;
+	btn2_box4_pecahan2.hidden = false;
+	per_nya_pecahan2_box4.hidden = false;
+	per2_nya_pecahan2_box4.hidden = false;
+	hasil_box4.innerHTML = "";
+}
+
+function cara1_box4(){
+	let x1 = Number(x1_box4.value)
+	let x2 = Number(x2_box4.value)
+
+	hasil_box4.innerHTML =
+	`
+	\\( (x-x1)(x-x2) = 0 \\)<br>
+	\\( (x-(${x1}))(x-(${x2})) = 0 \\)<br>
+	\\( x^2+(${-x2})x+(${-x1})x+(${-x1 * -x2}) = 0 \\)<br>
+	\\( x^2+(${-x2 + -x1})+(${-x1 * -x2}) = 0 \\)
+	`
+	MathJax.typeset();
+}
+
+function cara2_box4(){
+	let x1 = Number(x1_box4.value)
+	let x2 = Number(x2_box4.value)
+
+	hasil_box4.innerHTML =
+	`
+	\\( x^2-(x1+x2)x+x1.x2 = 0 \\)<br>
+	\\( x^2-((${x1})+(${x2}))x+(${x1}).(${x2}) = 0 \\)<br>
+	\\( x^2-(${x1 + x2})x+(${x1 * x2}) = 0 \\)
+	`
+	MathJax.typeset();
+}
+
+function cara1_box4_1pecahan(){
+	let x1 = Number(x1_box4_pecahan1.value)
+	let x2_pembilang = Number(x2_box4_pecahan1_pembilang.value) 
+	let x2_penyebut = Number(x2_box4_pecahan1_penyebut.value)
+
+	hasil_box4.innerHTML =
+	`
+	\\( (x-x1)(x-x2) = 0 \\)<br>
+	\\( (x-(${x1}))(x-( \\frac{${x2_pembilang}}{${x2_penyebut}})) = 0 \\)<br>
+	\\( (x+(${-x1}))(x+( \\frac{${-x2_pembilang}}{${x2_penyebut}})) = 0 \\)<br>
+	\\( x^2+( \\frac{${-x2_pembilang}}{${x2_penyebut}})x+(${-x1})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2+( \\frac{${-x2_pembilang}}{${x2_penyebut}} + \\frac{${-x1}}{1})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2+( \\frac{${-x2_pembilang}}{${x2_penyebut}} + \\frac{${-x1 * x2_penyebut}}{${x2_penyebut}})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2+( \\frac{${-x2_pembilang + (-x1 * x2_penyebut)}}{${x2_penyebut}})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( ${x2_penyebut}x^2+(${-x2_pembilang + (-x1 * x2_penyebut)})x+(${-x2_pembilang * -x1}) = 0 \\)
+	`
+	MathJax.typeset();
+}
+
+function cara2_box4_1pecahan(){
+	let x1 = Number(x1_box4_pecahan1.value)
+	let x2_pembilang = Number(x2_box4_pecahan1_pembilang.value) 
+	let x2_penyebut = Number(x2_box4_pecahan1_penyebut.value)
+
+	hasil_box4.innerHTML =
+	`
+	\\( x^2-(x1+x2)x+x1.x2 = 0 \\)<br>
+	\\( x^2-(${x1}+\\frac{${x2_pembilang}}{${x2_penyebut}})x+(${x1}).(\\frac{${x2_pembilang}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2-(\\frac{${x1}}{1}+\\frac{${x2_pembilang}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2-(\\frac{${x1 * x2_penyebut}}{${x2_penyebut}}+\\frac{${x2_pembilang}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2-(\\frac{${(x1 * x2_penyebut) + x2_pembilang}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) \\)<br>
+	\\( x^2+(\\frac{${-((x1 * x2_penyebut) + x2_pembilang)}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) \\)<br>
+	\\( ${x2_penyebut}x^2+(${-((x1 * x2_penyebut) + x2_pembilang)})x+(${x2_pembilang * x1}) = 0 \\)
+	`
+	MathJax.typeset();	
+}
+function cara1_box4_2pecahan(){
+	let x1_pembilang = Number(x1_box4_pecahan2_pembilang.value)
+	let x1_penyebut = Number(x1_box4_pecahan2_penyebut.value)
+	let x2_pembilang = Number(x2_box4_pecahan2_pembilang.value)
+	let x2_penyebut = Number(x2_box4_pecahan2_penyebut.value)
+
+	hasil_box4.innerHTML =
+	`
+	\\( (x-x1)(x-x2)=0 \\)<br>
+	\\( (x-(\\frac{${x1_pembilang}}{${x1_penyebut}}))(x-(\\frac{${x2_pembilang}}{${x2_penyebut}}))=0 \\)<br>
+	\\( x^2+(\\frac{${-x2_pembilang}}{${x2_penyebut}})x+(\\frac{${-x1_pembilang}}{${x1_penyebut}})x+(\\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}})=0 \\)<br>
+	\\( x^2+(\\frac{${((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang}}{${x2_penyebut * x1_penyebut}})x+(\\frac{${((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang}}{${x2_penyebut * x1_penyebut}})x+(\\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}})=0 \\)<br>
+	\\( x^2+(\\frac{${(((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang) + (((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang)}}{${x2_penyebut * x1_penyebut}})x+(\\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}}) =0 \\)<br>
+	\\( ${x2_penyebut * x1_penyebut}x^2+(${(((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang) + (((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang)})x+(${-x2_pembilang * -x1_pembilang})=0 \\)	
+	`
+	MathJax.typeset();
+}
+function cara2_box4_2pecahan(){
+	let x1_pembilang = Number(x1_box4_pecahan2_pembilang.value)
+	let x1_penyebut = Number(x1_box4_pecahan2_penyebut.value)
+	let x2_pembilang = Number(x2_box4_pecahan2_pembilang.value)
+	let x2_penyebut = Number(x2_box4_pecahan2_penyebut.value)
+
+	hasil_box4.innerHTML =
+	`
+	\\( x^2-(x1+x2)x+x1.x2=0 \\)<br>
+	\\( x^2-((\\frac{${x1_pembilang}}{${x1_penyebut}})+(\\frac{${x2_pembilang}}{${x2_penyebut}}))x+(\\frac{${x1_pembilang}}{${x1_penyebut}}).(\\frac{${x2_pembilang}}{${x2_penyebut}})=0 \\)<br>
+	\\( x^2-(\\frac{${((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang}+${((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang}}{${x1_penyebut * x2_penyebut}})x+(\\frac{${x1_pembilang * x2_pembilang}}{${x1_penyebut * x2_penyebut}})=0 \\)<br>
+	\\( x^2+(\\frac{${-((((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang) + (((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang))}}{${x1_penyebut * x2_penyebut}})x+(\\frac{${x1_pembilang * x2_pembilang}}{${x1_penyebut * x2_penyebut}})=0 \\)<br>
+	\\( ${x1_penyebut * x2_penyebut}x^2+(${-((((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang) + (((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang))})x+(${x1_pembilang * x2_pembilang})=0 \\)
+	`
+	MathJax.typeset();	
+}
+
+
+
 ////////////////////////////////////////////////////////////////
 // box3
 var hasil_box3 = document.getElementById('hasil_box3');
