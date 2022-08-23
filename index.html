@@ -26,6 +26,9 @@
 		<br><hr><br>
 		<p>menentukan persamaan kuadrat-dari akar akarnya</p>
 		<a href="#box4">cara 1 dan 2</a>
+		<br><hr><br>
+		<p>membuat grafik fungsi kuadrat dan langkah-langkahnya</p>
+		<a href="#box5">grafik fungsi kuadrat</a>
 	</div>
 
 	<div class="math_world_box_div"> <!-- box1 >>> mencari akar2 dengan persamaan kuadrat -->
@@ -100,10 +103,19 @@
 		</div>
 		<p id="hasil_box4"></p>
 	</div>
-	<div class="math_world_box_div">
-		<h3 id="box5">fungsi kuadrat</h3>
-		<!-- ongoing -->
-		<!-- grafik??? -->
+	<div class="math_world_box_div">  <!-- box5 >>> menggambar grafik fungsi kuadrat -->
+		<h3 id="box5">grafik fungsi kuadrat</h3>
+		<div style="display: flex;flex-direction: row;width: 500px;">
+			<input id="inputa_box5" type="text" name="inputa" style="width: 165.5px;text-align: center;" placeholder="a" autocomplete="off">
+			<input id="inputb_box5" type="text" name="inputb" style="width: 165.5px;text-align: center;" placeholder="b" autocomplete="off">
+			<input id="inputc_box5" type="text" name="inputb" style="width: 165.5px;text-align: center;" placeholder="c" autocomplete="off">
+			<button type="button" onclick="show_hasil_box5();show_grafik_box5();">hasil</button>
+		</div>
+		<div style="display: flex;flex-direction: row;align-items: flex-start;">
+			<p id="hasil_box5" style="width: 500px;"></p>
+			<canvas id="myCanvas_box5" width="500" height="500" style="border:1px solid #d3d3d3;">
+			Your browser does not support the HTML5 canvas tag.</canvas>
+		</div>
 	</div>
 </body>
 </html>
