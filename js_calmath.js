@@ -1,4 +1,238 @@
+////////////////////////////////////////////////////////////////
+// box 5
+var inputa_box5 = document.getElementById("inputa_box5");
+var inputb_box5 = document.getElementById("inputb_box5");
+var inputc_box5 = document.getElementById("inputc_box5");
+var hasil_box5 = document.getElementById("hasil_box5");
 
+// perhitungan rumus!
+function show_hasil_box5(){
+let a = Number(inputa_box5.value)
+let b = Number(inputb_box5.value)
+let c = Number(inputc_box5.value)
+
+// variabel x1 dan x2 , y , x-simetri , titik-puncak
+let akar_diskriminan =  Math.sqrt((b ** 2) + (-4 * a * c));
+let diskriminan = (b ** 2) + (-4 * a * c);
+
+let titik_sumbu_x1 = (-b + akar_diskriminan) / (2 * a);
+let titik_sumbu_x2 = (-b - akar_diskriminan) / (2 * a);
+let titik_sumbu_y = c;
+let sumbu_simetri = (-b) / (2 * a);
+let titik_puncak = (-diskriminan) / (4 * a);
+
+function pemfaktoran_di_langkah1_box5(){
+let pemfaktoran_akalic = a * c;
+	if (pemfaktoran_akalic < 0) {
+    for (let x1 = pemfaktoran_akalic; x1 <= -pemfaktoran_akalic + 1; x1++) {
+ 		var x2 =  pemfaktoran_akalic / x1;
+    	if (pemfaktoran_akalic / x1 == x2 && x2 + x1 == b) {
+			return  `\\( (${x1}) + (${x2}) = ${b} \\)<br>\\( (${x1}) x (${x2}) = ${c} \\)<br>\\( (x + (${x1}))(x + (${x2})) = 0 \\)<br>\\( x = ${-x1} || x = ${-x2} \\)<br>\\( (${-x1}, 0) (${-x2}, 0) \\)`
+    	} else if (x1 == -pemfaktoran_akalic + 1) {
+		alert("pemfaktoran gagal")	
+	}
+	    
+    }
+    }
+    if (pemfaktoran_akalic > 0) {
+    for (let x1 = -pemfaktoran_akalic; x1 <= pemfaktoran_akalic + 1; x1++) {
+ 		let x2 =  pemfaktoran_akalic / x1;
+    	if (pemfaktoran_akalic / x1 == x2 && x2 + x1 == b) {
+			return  `\\( (${x1}) + (${x2}) = ${b} \\)<br>\\( (${x1}) x (${x2}) = ${c} \\)<br>\\( (x + (${x1}))(x + (${x2})) = 0 \\)<br>\\( x = ${-x1} || x = ${-x2} \\)<br>\\( (${-x1}, 0) (${-x2}, 0) \\)`
+    	} else if (x1 == pemfaktoran_akalic + 1) {
+		alert("pemfaktoran gagal")
+	}
+    }
+    }
+    if (pemfaktoran_akalic == 0) {
+    	let x1 = b;
+    	let x2 = 0;
+			return  `\\( (${x1}) + (${x2}) = ${b} \\)<br>\\( (${x1}) x (${x2}) = ${c} \\)<br>\\( (x + (${x1}))(x + (${x2})) = 0 \\)<br>\\( x = ${-x1} || x = ${-x2} \\)<br>\\( (${-x1}, 0) (${-x2}, 0) \\)`
+    }
+}
+
+hasil_box5.innerHTML =
+`
+\\( f(x) = ax^2 + bx + c \\)<br>
+\\( y = ${a}x^2 + (${b})x + (${c}) \\)<br><br>
+1) titik sumbu x,y=0<br>
+\\( y = ${a}x^2 + (${b})x + (${c}) \\)<br>
+\\( ${a}x^2 + (${b})x + (${c}) = 0 \\)<br>
+${pemfaktoran_di_langkah1_box5()}<br><br>
+2) titik sumbu y,x=0<br>
+\\( y = ${a}x^2 + (${b})x + (${c}) \\)<br>
+\\( y = (${a})(0)^2 + (${b})(0) + (${c}) \\)<br>
+\\( y = ${c} \\)<br>
+\\( (0, ${c}) \\)<br><br>
+3) sumbu simetri<br>
+\\( x = \\frac{-b}{2a} \\)<br>
+\\( x = \\frac{-(${b})}{2(${a})} \\)<br>
+\\( x = \\frac{${-b}}{${2 * a}}) \\)<br>
+\\( x = ${(-b) / (2 * a)} \\)<br><br>
+4) titik puncah<br>
+\\( p(\\frac{-b}{2a}, \\frac{-d}{4a}) \\)<br>
+\\( p(${sumbu_simetri}, \\frac{-(${diskriminan})}{4(${a})}) \\)<br>
+\\( p(${sumbu_simetri}, \\frac{${-diskriminan}}{${4 * a}}) \\)<br>
+\\( p(${sumbu_simetri}, ${(-diskriminan) / (4 * a)}) \\)<br>
+
+\\( d = b^2 - 4ac \\)<br>
+\\( d = (${b})^2 - 4(${a})(${c}) \\)<br>
+\\( d = ${b ** 2} + (${-4 * a * c}) \\)<br>
+\\( d = ${(b ** 2) + (-4 * a * c)} \\)
+`;
+MathJax.typeset();
+}
+
+
+var canvas = document.getElementById("myCanvas_box5");
+canvas.hidden = true;
+
+function show_grafik_box5(){
+let a = Number(inputa_box5.value)
+let b = Number(inputb_box5.value)
+let c = Number(inputc_box5.value)
+
+// variabel x1 dan x2 , y , x-simetri , titik-puncak
+let akar_diskriminan =  Math.sqrt((b ** 2) + (-4 * a * c));
+let diskriminan = (b ** 2) + (-4 * a * c);
+
+let titik_sumbu_x1 = (-b + akar_diskriminan) / (2 * a);
+let titik_sumbu_x2 = (-b - akar_diskriminan) / (2 * a);
+let titik_sumbu_y = c;
+let sumbu_simetri = (-b) / (2 * a);
+let titik_puncak = (-diskriminan) / (4 * a);
+
+var ctx = canvas.getContext("2d");
+canvas.hidden = false;
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+// canvas grafik!
+ctx.beginPath();
+ctx.moveTo(250, 90);
+ctx.lineTo(250, 410);
+ctx.strokeStyle = "black";
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(90, 250);
+ctx.lineTo(410, 250);
+ctx.stroke();
+
+let x_xpositif = 260;
+for(let i = 1;i<=15;i++){
+ctx.beginPath();
+ctx.moveTo(x_xpositif, 250);
+ctx.lineTo(x_xpositif, 253);
+ctx.stroke();
+x_xpositif += 10;
+}
+ctx.font = "10px arial";
+ctx.fillText("x",410,250);
+
+let x_xnegatif = 240;
+for(let i = 1;i<=15;i++){
+ctx.beginPath();
+ctx.moveTo(x_xnegatif, 250);
+ctx.lineTo(x_xnegatif, 253);
+ctx.stroke();
+x_xnegatif -= 10;
+}
+ctx.font = "10px arial";
+ctx.fillText("-x",80,250);
+
+let y_ypositif = 240;
+for(let i = 1;i<=15;i++){
+ctx.beginPath();
+ctx.moveTo(250, y_ypositif);
+ctx.lineTo(253, y_ypositif);
+ctx.stroke();
+y_ypositif -= 10;
+}
+ctx.font = "10px arial";
+ctx.fillText("y",250,90);
+
+let y_ynegatif = 260;
+for(let i = 1;i<=15;i++){
+ctx.beginPath();
+ctx.moveTo(250, y_ynegatif);
+ctx.lineTo(253, y_ynegatif);
+ctx.stroke();
+y_ynegatif += 10;
+}
+ctx.font = "10px arial";
+ctx.fillText("-y",250,420);
+
+// titik-titik grafik
+// titik x1
+ctx.beginPath();
+ctx.arc(250 + (titik_sumbu_x1 * 10), 250, 2, 0, 2 * Math.PI);
+ctx.strokeStyle = "blue";
+ctx.stroke();
+// titik x2
+ctx.beginPath();
+ctx.arc(250 + (titik_sumbu_x2 * 10), 250, 2, 0, 2 * Math.PI);
+ctx.stroke();
+// titik y
+ctx.beginPath();
+ctx.arc(250, 250 - (titik_sumbu_y * 10), 2, 0, 2 * Math.PI);
+ctx.stroke();
+// titik puncak
+ctx.beginPath();
+ctx.arc(250 + (sumbu_simetri * 10), 250 - (titik_puncak * 10), 2, 0, 2 * Math.PI);
+ctx.stroke();
+
+// garis bantu ke puncak
+ctx.beginPath();
+ctx.moveTo(250 + (sumbu_simetri * 10), 250);
+ctx.lineTo(250 + (sumbu_simetri * 10), 250 - (titik_puncak * 10));
+ctx.strokeStyle = "gray";
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(250, 250 - (titik_puncak * 10));
+ctx.lineTo(250 + (sumbu_simetri * 10), 250 - (titik_puncak * 10));
+ctx.stroke();
+
+// grafik
+if (titik_sumbu_x2 > 0 && titik_sumbu_x1 > 0) {
+	ctx.beginPath();
+	ctx.moveTo(250, 250 - (titik_sumbu_y * 10));
+	ctx.quadraticCurveTo(250 + (sumbu_simetri * 10), 250 - ((titik_puncak * 20) + (-titik_sumbu_y * 10)), 250 + ((titik_sumbu_x1 + titik_sumbu_x2) * 10), 250 - (titik_sumbu_y * 10));
+	// 20 untuk beda 1,10 untuk beda 1/2,5 untuk beda 1/4
+	ctx.strokeStyle = "red";
+	ctx.stroke();
+	ctx.font = "10px arial";
+	ctx.fillText(`P(${sumbu_simetri} , ${titik_puncak})`,(250 + (sumbu_simetri * 10)) + 20, 250 - (titik_puncak * 10));
+
+	// titik akhir
+	ctx.beginPath();
+	ctx.arc( 250 + ((titik_sumbu_x1 + titik_sumbu_x2) * 10), 250 - (titik_sumbu_y * 10), 2, 0, 2 * Math.PI);
+	ctx.strokeStyle = "blue";
+	ctx.stroke();
+} else if(titik_sumbu_x2 < 0 && titik_sumbu_x1 < 0){
+	ctx.beginPath();
+	ctx.moveTo(250 + ((titik_sumbu_x1 + titik_sumbu_x2) * 10), 250 - (titik_sumbu_y * 10));
+	ctx.quadraticCurveTo(250 + (sumbu_simetri * 10), 250 - ((titik_puncak * 20) + (-titik_sumbu_y * 10)), 250, 250 - (titik_sumbu_y * 10));
+	// 20 untuk beda 1,10 untuk beda 1/2,5 untuk beda 1/4
+	ctx.strokeStyle = "red";
+	ctx.stroke();
+	ctx.font = "10px arial";
+	ctx.fillText(`P(${sumbu_simetri} , ${titik_puncak})`,(250 + (sumbu_simetri * 10)) + 20, 250 - (titik_puncak * 10));
+
+	// titik awal
+	ctx.beginPath();
+	ctx.arc( 250 + ((titik_sumbu_x1 + titik_sumbu_x2) * 10), 250 - (titik_sumbu_y * 10), 2, 0, 2 * Math.PI);
+	ctx.strokeStyle = "blue";
+	ctx.stroke();
+} else{
+	ctx.beginPath();
+	ctx.moveTo(250 + (titik_sumbu_x2 * 10), 250);
+	ctx.quadraticCurveTo(250 + (sumbu_simetri * 10), 250 - (titik_puncak * 20), 250 + (titik_sumbu_x1 * 10), 250);
+	// 20 untuk beda 1,10 untuk beda 1/2,5 untuk beda 1/4
+	ctx.strokeStyle = "red";
+	ctx.stroke();
+	ctx.font = "10px arial";
+	ctx.fillText(`P(${sumbu_simetri} , ${titik_puncak})`,(250 + (sumbu_simetri * 10)) + 20, 250 - (titik_puncak * 10));
+}
+}
 ////////////////////////////////////////////////////////////////
 // box 4
 var hasil_box4 = document.getElementById("hasil_box4");
@@ -129,7 +363,7 @@ function cara2_box4(){
 	`
 	\\( x^2-(x1+x2)x+x1.x2 = 0 \\)<br>
 	\\( x^2-((${x1})+(${x2}))x+(${x1}).(${x2}) = 0 \\)<br>
-	\\( x^2-(${x1 + x2})x+(${x1 * x2}) = 0 \\)
+	\\( x^2+(${-(x1 + x2)})x+(${x1 * x2}) = 0 \\)
 	`
 	MathJax.typeset();
 }
