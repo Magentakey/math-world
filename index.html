@@ -29,23 +29,37 @@
 		<br><hr><br>
 		<p>membuat grafik fungsi kuadrat dan langkah-langkahnya</p>
 		<a href="#box5">grafik fungsi kuadrat</a>
+		<br><hr><br>
+		<p>menentukan fungsi kuadrat jika diketahui grafik/unsur2nya</p>
+		<a href="#box6">fungsi kuadrat dari grafik</a>
 	</div>
 
 	<div class="math_world_box_div"> <!-- box1 >>> mencari akar2 dengan persamaan kuadrat -->
-		<h3 id="box1">pemfaktoran</h3>
-		<input style="width: 25%" id="inputa" placeholder="a" autocomplete="off" type="text" name="inputa">
-		<input style="width: 25%" id="inputb" placeholder="b" autocomplete="off" type="text" name="inputb">
-		<input style="width: 25%" id="inputc" placeholder="c _ usahakan tidak lebih dari 1000" autocomplete="off" type="text" name="inputc">
-		<button type="button" onclick="hasilfaktor()">hasil</button>
-		<p id="hasilapoekrpwoarkpa"></p>
-	</div>
-	<div class="math_world_box_div"> <!-- box2 >>> mencari akar2 dengan persamaan kuadrat -->
-		<h3 id="box2">rumus abc</h3>
-		<input style="width: 25%" id="inputa_box2" placeholder="a" autocomplete="off" type="text" name="inputa">
-		<input style="width: 25%" id="inputb_box2" placeholder="b" autocomplete="off" type="text" name="inputb">
-		<input style="width: 25%" id="inputc_box2" placeholder="c _ usahakan tidak lebih dari 1000" autocomplete="off" type="text" name="inputc">
-		<button type="button" onclick="hasilfaktor_box2()">hasil</button>
-		<p id="hasil_box2"></p>
+		<div style="display: flex;flex-direction: row;">
+			<div>
+				<h3 id="box1">pemfaktoran</h3>
+				<div style="display: flex;flex-direction: column;align-items: flex-start;">
+					<input style="max-width: 170px;" id="inputa" placeholder="a" autocomplete="off" type="text" name="inputa">
+					<input style="max-width: 170px;" id="inputb" placeholder="b" autocomplete="off" type="text" name="inputb">
+					<input style="max-width: 170px;" id="inputc" placeholder="c <= 1000" autocomplete="off" type="text" name="inputc">
+				</div>
+					<button type="button" onclick="hasilfaktor()">hasil</button>
+					<button type="button" onclick="clear_box1()">clear</button>
+				<p id="hasilapoekrpwoarkpa"></p>
+			</div>
+									 <!-- box2 >>> mencari akar2 dengan persamaan kuadrat -->
+			<div>
+				<h3 id="box2">rumus abc</h3>
+				<div style="display: flex;flex-direction: column;align-items: flex-start;">
+					<input style="max-width: 170px;" id="inputa_box2" placeholder="a" autocomplete="off" type="text" name="inputa">
+					<input style="max-width: 170px;" id="inputb_box2" placeholder="b" autocomplete="off" type="text" name="inputb">
+					<input style="max-width: 170px;" id="inputc_box2" placeholder="c" autocomplete="off" type="text" name="inputc">
+				</div>
+					<button type="button" onclick="hasilfaktor_box2()">hasil</button>
+					<button type="button" onclick="clear_box2()">clear</button>
+				<p id="hasil_box2"></p>
+			</div>
+		</div>
 	</div>
 	<div class="math_world_box_div"> <!-- box3 >>> hasil jumlah dan kali persamaan kuadrat -->
 		<h3 id="box3">hasil jumlah dan kali persamaan kuadrat</h3>
@@ -58,64 +72,154 @@
 		<button onclick="hasil_tiga_box3()">\( x1^2+x2^2 \)</button>
 		<button onclick="hasil_empat_box3()">\( \frac{1}{x1} + \frac{1}{x2} \)</button>
 		<button onclick="hasil_lima_box3()">\( \frac{x1}{x2}+\frac{x2}{x1} \)</button>
+		<button onclick="clear_box3()">clear</button>
 		<p id="hasil_box3"></p>
 	</div>
 	<div class="math_world_box_div">  <!-- box4 >>> menentukan persamaan kuadrat dari akar-akar -->
 		<h3 id="box4">menentukan persamaan kuadrat</h3>
-		<div style="border: 2px dotted black;display: flex;">
+		<div style="display: flex;">
 		
 		<!-- default -->
-		<input type="text" placeholder="x1" autocomplete="off" id="inputx1_box4" name="inputx">
-		<input type="text" placeholder="x2" autocomplete="off" id="inputx2_box4" name="inputx">
-		<button id="btn_box4" type="button" onclick="cara1_box4()">hasil-cara 1</button>
-		<button id="btn2_box4" type="button" onclick="cara2_box4()">hasuk-cara 2</button>
+		<div id="default_box_box4">
+			<input type="text" placeholder="x1" autocomplete="off" id="inputx1_box4" name="inputx">
+			<br>
+			<input type="text" placeholder="x2" autocomplete="off" id="inputx2_box4" name="inputx">
+			<br>
+			<button style="width: 66.6px;" id="btn_box4" type="button" onclick="cara1_box4()">cara 1</button>
+			<button style="width: 66.6px;" id="btn2_box4" type="button" onclick="cara2_box4()">cara 2</button>
+			<button style="width: 66.6px;" type="button" onclick="clear_box4()">clear</button>
+		</div>
 
 		<!-- 1 pecahan -->
-		<input id="inputx1_box4_pecahan1" type="text" name="inputx" placeholder="x1" autocomplete="off" style="width: 214px;text-align: center;">
-		<div style="display: flex;">
-			<input id="inputx2_box4_pecahan1_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x2-pembilang" style="width: 107px; height: 34px;text-align: center;">
-			<span id="per_nya_pecahan1_box4" style="font-size: 23px;">per</span>
-			<input id="inputx2_box4_pecahan1_penyebut" autocomplete="off" placeholder="x2-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+		<div id="pecahan1_box_box4">
+			<input id="inputx1_box4_pecahan1" type="text" name="inputx" placeholder="x1" autocomplete="off" style="width: 214px;text-align: center;">
+			<div style="display: flex;">
+				<input id="inputx2_box4_pecahan1_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x2-pembilang" style="width: 107px; height: 34px;text-align: center;">
+				<span id="per_nya_pecahan1_box4" style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+				<input id="inputx2_box4_pecahan1_penyebut" autocomplete="off" placeholder="x2-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+			</div>
+			<button id="btn_box4_pecahan1" type="button" onclick="cara1_box4_1pecahan()">cara 1</button>
+			<button id="btn2_box4_pecahan1" type="button" onclick="cara2_box4_1pecahan()">cara 2</button>
+			<button style="width: 66.6px;" type="button" onclick="clear_box4()">clear</button>
 		</div>
-		<button id="btn_box4_pecahan1" type="button" onclick="cara1_box4_1pecahan()">hasil-cara 1</button>
-		<button id="btn2_box4_pecahan1" type="button" onclick="cara2_box4_1pecahan()">hasil-cara 2</button>
 
 		<!-- 2 pecahan -->
-		<div style="display: flex;">
-			<input id="inputx1_box4_pecahan2_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x1-pembilang" style="width: 107px; height: 34px;text-align: center;">
-			<span id="per_nya_pecahan2_box4" style="font-size: 23px;">per</span>
-			<input id="inputx1_box4_pecahan2_penyebut" autocomplete="off" placeholder="x1-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+		<div id="pecahan2_box_box4">
+			<div style="display: flex;">
+				<input id="inputx1_box4_pecahan2_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x1-pembilang" style="width: 107px; height: 34px;text-align: center;">
+				<span id="per_nya_pecahan1_box4" style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+				<input id="inputx1_box4_pecahan2_penyebut" autocomplete="off" placeholder="x1-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+			</div>
+			<div style="display: flex;">
+				<input id="inputx2_box4_pecahan2_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x2-pembilang" style="width: 107px; height: 34px;text-align: center;">
+				<span id="per_nya_pecahan1_box4" style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+				<input id="inputx2_box4_pecahan2_penyebut" autocomplete="off" placeholder="x2-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
+			</div>
+			<button id="btn_box4_pecahan2" type="button" onclick="cara1_box4_2pecahan()">cara 1</button>
+			<button id="btn2_box4_pecahan2" type="button" onclick="cara2_box4_2pecahan()">cara 2</button>
+			<button style="width: 66.6px;" type="button" onclick="clear_box4()">clear</button>
 		</div>
-		<div style="display: flex;">
-			<input id="inputx2_box4_pecahan2_pembilang" type="text" name="inputx" autocomplete="off" placeholder="x2-pembilang" style="width: 107px; height: 34px;text-align: center;">
-			<span id="per2_nya_pecahan2_box4" style="font-size: 23px;">per</span>
-			<input id="inputx2_box4_pecahan2_penyebut" autocomplete="off" placeholder="x2-penyebut" type="text" name="inputx" style="width: 107px; height: 34px;text-align: center;">
-		</div>
-		<button id="btn_box4_pecahan2" type="button" onclick="cara1_box4_2pecahan()">hasil-cara 1</button>
-		<button id="btn2_box4_pecahan2" type="button" onclick="cara2_box4_2pecahan()">hasil-cara 2</button>
 
 		<!-- tipe input/masukan -->
-		<div style="border: 3px solid black;display: flex;flex-direction: row;">
-			<button type="button" onclick="default_box4()">default</button>
-			<button type="button" onclick="pecahan1_box4()">1 pecahan</button>
-			<button type="button" onclick="pecahan2_box4()">2 pecahan</button>
+		<div style="border: 3px solid black;display: flex;flex-direction: column;justify-content: space-around;width: 106px;">
+			<button style="height: 34px;" type="button" onclick="default_box4()">default</button>
+			<button style="height: 34px;" type="button" onclick="pecahan1_box4()">1 pecahan</button>
+			<button style="height: 34px;" type="button" onclick="pecahan2_box4()">2 pecahan</button>
 		</div>
 		</div>
-		<p id="hasil_box4"></p>
+		<p style="word-break: keep-all;" id="hasil_box4"></p>
 	</div>
 	<div class="math_world_box_div">  <!-- box5 >>> menggambar grafik fungsi kuadrat -->
 		<h3 id="box5">grafik fungsi kuadrat</h3>
-		<div style="display: flex;flex-direction: row;width: 500px;">
-			<input id="inputa_box5" type="text" name="inputa" style="width: 165.5px;text-align: center;" placeholder="a" autocomplete="off">
-			<input id="inputb_box5" type="text" name="inputb" style="width: 165.5px;text-align: center;" placeholder="b" autocomplete="off">
-			<input id="inputc_box5" type="text" name="inputb" style="width: 165.5px;text-align: center;" placeholder="c" autocomplete="off">
-			<button type="button" onclick="show_hasil_box5();show_grafik_box5();">hasil</button>
+		<div style="display: flex;flex-direction: column;align-items: flex-start;">
+			<input id="inputa_box5" type="text" name="inputa" style="text-align: center;" placeholder="a" autocomplete="off">
+			<input id="inputb_box5" type="text" name="inputb" style="text-align: center;" placeholder="b" autocomplete="off">
+			<input id="inputc_box5" type="text" name="inputb" style="text-align: center;" placeholder="c" autocomplete="off">
 		</div>
-		<div style="display: flex;flex-direction: row;align-items: flex-start;">
-			<p id="hasil_box5" style="width: 500px;"></p>
-			<canvas id="myCanvas_box5" width="500" height="500" style="border:1px solid #d3d3d3;">
+			<button type="button" onclick="show_hasil_box5();show_grafik_box5();">hasil</button>
+			<button type="button" onclick="clear_box5()">clear</button>
+		<div style="display: flex;flex-direction: row;align-items: flex-start;border-bottom: 0.1px dotted black;">
+			<p id="hasil_box5" style="display: block;"></p>
+			<canvas class="mycanvas_box5_style" id="myCanvas_box5" width="500" height="500" style="border:1px solid #d3d3d3;">
 			Your browser does not support the HTML5 canvas tag.</canvas>
 		</div>
 	</div>
+	<div class="math_world_box_div">  <!-- box6 >>> menentukan fungsi kuadrat jika diketahui grafik atau unsur-unsurnya -->
+		<h3 id="box6">menentukan fungsi kuadrat jika diketahui grafik/unsur2nya</h3>
+		<div style="display: flex;flex-direction: row;">
+			<div id="titik3_div_box6">
+				<div>
+					<p>titik 1</p>
+					<input id="input_x1_box_titik3_box6" autocomplete="off" placeholder="x1" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>	
+					<input id="input_fx1_box_titik3_box6" autocomplete="off" placeholder="y1" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<div>
+					<p>titik 2</p>
+					<input id="input_x2_box_titik3_box6" autocomplete="off" placeholder="x2" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+					<input id="input_fx2_box_titik3_box6" autocomplete="off" placeholder="y2" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<div>
+					<p>titik 3</p>
+					<input id="input_x3_box_titik3_box6" autocomplete="off" placeholder="x3" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+					<input id="input_fx3_box_titik3_box6" autocomplete="off" placeholder="y3" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<button type="button" onclick="showhasil_3titik_box6()">hasil</button>
+				<button type="button" onclick="clear_box_box6()">clear</button>
+			</div>
+			<div id="titik_2sumbu_x_dan_1titik_lainya_box6">
+				<div>
+					<p>titik potong sumbu x (1)</p>
+					<input id="input_x1_box6" autocomplete="off" placeholder="x1" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>	
+					<input id="input_x1_0_box6" autocomplete="off" placeholder="0" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<div>
+					<p>titik potong sumbu x (2)</p>
+					<input id="input_x2_box6" autocomplete="off" placeholder="x2" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+					<input id="input_x2_0_box6" autocomplete="off" placeholder="0" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<div>
+					<p>satu titik lainya</p>
+					<input id="input_x_box6" autocomplete="off" placeholder="x" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+					<input id="input_y_box6" autocomplete="off" placeholder="y" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<button type="button" onclick="showhasil_2titikx_dan_1titik_lainya_box6()">hasil</button>
+				<button type="button" onclick="clear_box_box6()">clear</button>
+			</div>
+			<div id="titik_puncak_dan_1titik_lainya_box6">
+				<div>
+					<p>titik puncak</p>
+					<input id="input_xp_puncak_box6" autocomplete="off" placeholder="x" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+					<input id="input_yp_puncak_box6" autocomplete="off" placeholder="y" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<div>
+					<p>satu titik lainya</p>
+					<input id="input_x_puncak_box6" autocomplete="off" placeholder="xp" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+					<span style="font-size: 23px;border:1px dotted black;margin:2px;padding: 0 10px;">/</span>
+					<input id="input_y_puncak_box6" autocomplete="off" placeholder="yp" style="width: 40px;height: 34px;text-align: center;" type="text" name="input">	
+				</div>
+				<button type="button" onclick="showhasil_titik_puncak_box6()">hasil</button>
+				<button type="button" onclick="clear_box_box6()">clear</button>
+			</div>
+			<div style="display: flex;flex-direction: column;border:3px solid black;height: 159px;">
+				<button style="height: 51px;" type="button" onclick="titik3_box6()">3 titik</button>
+				<button style="height: 51px;" type="button" onclick="titik2x_box6()">2 titik x dan lainya</button>
+				<button style="height: 51px;" type="button" onclick="titikpuncak_box6()">titik puncak</button>
+			</div>
+		</div>
+		<p id="hasil_box6"></p>
+	</div>
+
+	<footer style="display: flex;flex-direction: row;justify-content: space-around;">
+		<div style="height: 75px;flex: 15%; background-color: red;"></div>
+		<div style="height: 75px;flex: 70%; background-color: blue;"></div>
+		<div style="height: 75px;flex: 15%; background-color: red;"></div>
+	</footer>
 </body>
 </html>
