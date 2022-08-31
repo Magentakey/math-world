@@ -1,4 +1,319 @@
 ////////////////////////////////////////////////////////////////
+const hasil_box6 = document.getElementById('hasil_box6');
+// 3 titik
+const x1_3titik_box_box6 = document.getElementById("input_x1_box_titik3_box6");
+const fx1_3titik_box_box6 = document.getElementById("input_fx1_box_titik3_box6");
+const x2_3titik_box_box6 = document.getElementById("input_x2_box_titik3_box6");
+const fx2_3titik_box_box6 = document.getElementById("input_fx2_box_titik3_box6");
+const x3_3titik_box_box6 = document.getElementById("input_x3_box_titik3_box6");
+const fx3_3titik_box_box6 = document.getElementById("input_fx3_box_titik3_box6");
+// 2 sumbu x dan  1 lainya
+const x1_box_box6 = document.getElementById("input_x1_box6");
+const x1_0_box_box6 = document.getElementById("input_x1_0_box6");
+const x2_box_box6 = document.getElementById("input_x2_box6");
+const x2_0_box_box6 = document.getElementById("input_x2_0_box6");
+const x_box_box6 = document.getElementById("input_x_box6");
+const y_box_box6 = document.getElementById("input_y_box6");
+// titik puncak
+const x_puncak_box_box6 = document.getElementById("input_x_puncak_box6");
+const y_puncak_box_box6 = document.getElementById("input_y_puncak_box6");
+const xp_puncak_box_box6 = document.getElementById("input_xp_puncak_box6");
+const yp_puncak_box_box6 = document.getElementById("input_yp_puncak_box6");
+
+// kotak show/hidden box
+const div_titik3_box6 = document.getElementById("titik3_div_box6");
+const div_2sumbu_box6 = document.getElementById("titik_2sumbu_x_dan_1titik_lainya_box6");
+const div_puncak_box6 = document.getElementById("titik_puncak_dan_1titik_lainya_box6");
+//default
+div_titik3_box6.hidden = false;
+div_2sumbu_box6.hidden = true;
+div_puncak_box6.hidden = true;
+
+function titik3_box6(){
+	div_titik3_box6.hidden = false;
+	div_2sumbu_box6.hidden = true;
+	div_puncak_box6.hidden = true;
+	hasil_box6.innerHTML = "";
+}
+function titik2x_box6(){
+	div_titik3_box6.hidden = true
+	div_2sumbu_box6.hidden = false;
+	div_puncak_box6.hidden = true;
+	hasil_box6.innerHTML = "";
+}
+function titikpuncak_box6(){
+	div_titik3_box6.hidden = true;
+	div_2sumbu_box6.hidden = true;
+	div_puncak_box6.hidden = false;	
+	hasil_box6.innerHTML = "";
+}
+
+function showhasil_3titik_box6(){
+	let x1 = Number(x1_3titik_box_box6.value);
+	let fx1 = Number(fx1_3titik_box_box6.value);
+	let x2 = Number(x2_3titik_box_box6.value);
+	let fx2 = Number(fx2_3titik_box_box6.value);
+	let x3 = Number(x3_3titik_box_box6.value);
+	let fx3 = Number(fx3_3titik_box_box6.value);
+
+	if (isNaN(x1) || isNaN(fx1) || isNaN(x2) || isNaN(fx2) || isNaN(x3) || isNaN(fx3)) {
+		hasil_box6.innerHTML = "angka!";
+		return;
+	}
+
+	if (x1 == 0 && x2 == 0 || x1 == 0 && x3 == 0 || x2 == 0 && x3 == 0 || x1 == 0 && x2 == 0 && x3 == 0) {
+		hasil_box6.innerHTML = "yang berpotongan dengan sumbu y tidak mungkin ada 2 atau lebih!";
+		return;
+	}else if (fx1 == 0 && fx2 == 0 && fx3 == 0){
+		hasil_box6.innerHTML = "yang berpotongan dengan sumbu x tidak mungkin ada 3!"
+		return;
+	}
+// 
+	b_atas = Math.abs((x2) + (-x1));
+	b_bawah = Math.abs(x3 + (-x1));
+	if ( Math.abs(b_atas) > 0) {
+		for (let i = 2; i <= Math.abs(b_atas); i++) {
+			if (b_atas % i == 0 && b_bawah % i == 0) {
+				b_atas /= i;
+				b_bawah /= i;
+				i = 1;
+			}
+		}
+	}
+	if (b_atas % b_bawah == 0 && b_bawah % b_atas == 0) {
+		b_atas = 1;
+		b_bawah = 1;
+	}
+	a = (((fx2 - fx1) * b_bawah) - ((fx3 - fx1) * b_atas)) / ((((x2 ** 2) + (-(x1 ** 2))) * b_bawah) - (((x3 ** 2) + (-(x1 ** 2))) * b_atas));
+	b = ((fx2 - fx1) - (((x2 ** 2) + (-(x1 ** 2))) * a)) / ((x2) + (-x1));
+	if ((((x2) + (-x1)) * b_bawah) - ((x3 + (-x1)) * b_atas) != 0) {
+		a = (((fx2 - fx1) * b_bawah) + ((fx3 - fx1) * b_atas)) / ((((x2 ** 2) + (-(x1 ** 2))) * b_bawah) + (((x3 ** 2) + (-(x1 ** 2))) * b_atas));
+		b = ((fx2 - fx1) - (((x2 ** 2) + (-(x1 ** 2))) * a)) / ((x2) + (-x1));
+	}
+	c = fx1 - (((x1 ** 2) * a) + (x1 * b));
+		//variabel *jika* puncak 
+		d = ((b ** 2) - (4 * a * c));
+		px = (-b / (2 * a));
+		py = (-d / (4 * a));
+	function proses_eliminasi_box6_bagian_3titik(){
+		if ((((x2) + (-x1)) * b_bawah) - ((x3 + (-x1)) * b_atas) == 0) {
+			return `\\( ${(((x2 ** 2) + (-(x1 ** 2))) * b_bawah) - (((x3 ** 2) + (-(x1 ** 2))) * b_atas)}a = ${((fx2 - fx1) * b_bawah) - ((fx3 - fx1) * b_atas)} \\)<br>
+			\\( a = ${(((fx2 - fx1) * b_bawah) - ((fx3 - fx1) * b_atas)) / ((((x2 ** 2) + (-(x1 ** 2))) * b_bawah) - (((x3 ** 2) + (-(x1 ** 2))) * b_atas))} \\)<br>
+			`;
+		}else{
+			return `\\( ${(((x2 ** 2) + (-(x1 ** 2))) * b_bawah) + (((x3 ** 2) + (-(x1 ** 2))) * b_atas)}a = ${((fx2 - fx1) * b_bawah) + ((fx3 - fx1) * b_atas)} \\)<br>
+			\\( a = ${(((fx2 - fx1) * b_bawah) + ((fx3 - fx1) * b_atas)) / ((((x2 ** 2) + (-(x1 ** 2))) * b_bawah) + (((x3 ** 2) + (-(x1 ** 2))) * b_atas))} \\)<br>
+			`;
+		}
+	}
+
+	perhitungan = 
+	`
+	\\( f(x) = ax^2 + bx + c = 0 \\)<br>
+	\\( f(${x1}) = a(${x1})^2 + b(${x1}) + c = ${fx1} \\)<br>
+	\\( // ${x1 ** 2}a + ${x1}b + c = ${fx1} \\)<br>
+	\\( f(${x2}) = a(${x2})^2 + b(${x2}) + c = ${fx2} \\)<br>
+	\\( // ${x2 ** 2}a + ${x2}b + c = ${fx2} \\)<br>
+	\\( f(${x3}) = a(${x3})^2 + b(${x3}) + c = ${fx3} \\)<br>
+	\\( // ${x3 ** 2}a + ${x3}b + c = ${fx3} \\)<br><br>
+	\\( ${x1 ** 2}a + ${x1}b + c = ${fx1} <<< persamaan-(1)\\)<br>
+	\\( ${x2 ** 2}a + ${x2}b + c = ${fx2} <<< persamaan-(2)\\)<br>
+	\\( ${x3 ** 2}a + ${x3}b + c = ${fx3} <<< persamaan-(3)\\)<br><br>
+	subtitusi persamaan (1) a ke persamaan (2)<br>
+	\\( ${x1 ** 2}a + ${x1}b + c = ${fx1} \\)<br>
+	\\( c = ${fx1} + ${-(x1 ** 2)}a + ${-x1}b \\)<br>	
+	\\( ${x2 ** 2}a + ${x2}b + c = ${fx2} \\)<br>
+	\\( ${x2 ** 2}a + ${x2}b + (${fx1} + ${-(x1 ** 2)}a + ${-x1}b) = ${fx2} \\)<br>	
+	\\( ${x2 ** 2}a + ${x2}b + ${fx1} + ${-(x1 ** 2)}a + ${-x1}b = ${fx2} \\)<br>	
+	\\( ${(x2 ** 2) + (-(x1 ** 2))}a + ${(x2) + (-x1)}b = ${fx2 - fx1} <<< persamaan-(4) \\)<br>	
+	subtitusi persamaan (1) a ke persamaan (3)<br>
+	\\( ${x1 ** 2}a + ${x1}b + c = ${fx1} \\)<br>
+	\\( c = ${fx1} + ${-(x1 ** 2)}a + ${-x1}b \\)<br>
+	\\( ${x3 ** 2}a + ${x3}b + c = ${fx3} \\)<br>
+	\\( ${x3 ** 2}a + ${x3}b + (${fx1} + ${-(x1 ** 2)}a + ${-x1}b) = ${fx3} \\)<br>
+	\\( ${x3 ** 2}a + ${x3}b + ${fx1} + ${-(x1 ** 2)}a + ${-x1}b = ${fx3} \\)<br>
+	\\( ${(x3 ** 2) + (-(x1 ** 2))}a + ${x3 + -x1}b = ${fx3 - fx1} <<< persamaan-(5) \\)<br>
+	eliminasi persamaan (4) dan persamaan (5)<br>
+	\\( ${(x2 ** 2) + (-(x1 ** 2))}a + ${x2 + (-x1)}b = ${fx2 - fx1} |x ${b_bawah}| ${((x2 ** 2) + (-(x1 ** 2))) * b_bawah}a + ${((x2) + (-x1)) * b_bawah}b = ${(fx2 - fx1) * b_bawah} \\)<br>
+	\\( ${(x3 ** 2) + (-(x1 ** 2))}a + ${x3 + (-x1)}b = ${fx3 - fx1} |x ${b_atas}| ${((x3 ** 2) + (-(x1 ** 2))) * b_atas}a + ${(x3 + (-x1)) * b_atas}b = ${(fx3 - fx1) * b_atas}  \\)<br>
+	\\( ${((x2 ** 2) + (-(x1 ** 2))) * b_bawah}a + ${((x2) + (-x1)) * b_bawah}b = ${(fx2 - fx1) * b_bawah} \\)<br>
+	\\( ${((x3 ** 2) + (-(x1 ** 2))) * b_atas}a + ${(x3 + (-x1)) * b_atas}b = ${(fx3 - fx1) * b_atas} \\)<br>
+	${proses_eliminasi_box6_bagian_3titik()}
+	subtitusi a = ${a} ke persamaan (4)<br>
+	\\( ${(x2 ** 2) + (-(x1 ** 2))}(${a}) + ${(x2) + (-x1)}b = ${fx2 - fx1} \\)<br>
+	\\( ${((x2 ** 2) + (-(x1 ** 2))) * a} + ${(x2) + (-x1)}b = ${fx2 - fx1} \\)<br>
+	\\( ${(x2) + (-x1)}b = ${(fx2 - fx1) - (((x2 ** 2) + (-(x1 ** 2))) * a)} \\)<br>
+	\\( b = ${((fx2 - fx1) - (((x2 ** 2) + (-(x1 ** 2))) * a)) / ((x2) + (-x1))} \\)<br>
+	subtitusi a = ${a} dan b = ${b} ke persamaan (1)<br>
+	\\( ${x1 ** 2}a + ${x1}b + c = ${fx1} \\)<br>
+	\\( ${x1 ** 2}(${a}) + ${x1}(${b}) + c = ${fx1} \\)<br>
+	\\( ${(x1 ** 2) * a} + ${x1 * b} + c = ${fx1} \\)<br>
+	\\( ${((x1 ** 2) * a) + (x1 * b)} + c = ${fx1} \\)<br>
+	\\( c = ${fx1 - (((x1 ** 2) * a) + (x1 * b))} \\)<br>
+	jadi, persamaan fungsi kuadratnya adalah f(x) = ${a}x<sup>2</sup> + ${b}x + ${c} 
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box6.innerHTML = perhitungan_replace;
+	MathJax.typeset();
+
+}
+
+function showhasil_2titikx_dan_1titik_lainya_box6(){
+	let x1 = Number(x1_box_box6.value);
+	let x1_0 = Number(x1_0_box_box6.value);
+	let x2 = Number(x2_box_box6.value);
+	let x2_0 = Number(x2_0_box_box6.value);
+	let x = Number(x_box_box6.value);
+	let y = Number(y_box_box6.value);
+	let a = y/((x-x1)*(x-x2));
+
+	if (isNaN(x1) || isNaN(x1_0) || isNaN(x2) || isNaN(x2_0) || isNaN(x) || isNaN(y)) {
+		hasil_box6.innerHTML = "angka!";
+		return;
+	}
+	if (x1_0 != 0 || x2_0 != 0) {
+		alert(`keduanya,harus nol bukan (${x1_0}) atau (${x2_0})`);
+		hasil_box6.innerHTML = "";
+		return;
+	}
+	if (y % ((x-x1)*(x-x2)) == 0) {
+		perhitungan = 
+		`
+		\\( (x1, 0) , (x2, 0) , (x, y) \\)<br>
+		\\( (${x1}, ${x1_0}) , (${x2}, ${x2_0}) , (${x}, ${y}) \\)<br><br>
+		\\( y = a(x - x1)(x - x2) \\)<br>
+		\\( ${y} = a(${x} - ${x1})(${x} - ${x2}) \\)<br>
+		\\( ${y} = a(${x - x1})(${x - x2}) \\)<br>
+		\\( ${y} = ${(x - x1) * (x - x2)}a \\)<br>
+		\\( a = \\frac{${y}}{${(x - x1) * (x - x2)}} \\)<br>
+		\\( a = ${y / ((x - x1) * (x - x2))} \\)<br><br>
+		\\( y = a(x - x1)(x - x2) \\)<br>
+		\\( y = ${a}(x + ${-x1})(x + ${-x2}) \\)<br>
+		\\( y = ${a}(x^2 + ${-x2}x + ${-x1}x + ${-x1 * -x2}) \\)<br>
+		\\( y = ${a}(x^2 + ${-x2 + -x1}x + ${-x1 * -x2}) \\)<br>
+		\\( y = ${a}x^2 + ${a * (-x2 + - x1)}x + ${a * (-x1 * -x2)} \\)
+		`;
+		perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+		hasil_box6.innerHTML = perhitungan_replace;
+		MathJax.typeset();
+	}else{
+		a_atas = y;
+		a_bawah = ((x-x1)*(x-x2));
+		if (Math.abs(a_atas) > 0) {
+			for (let i = 2; i <= Math.abs(a_atas); i++) {
+				if (a_atas % i == 0 && a_bawah % i == 0) {
+					a_atas /= i;
+					a_bawah /= i;
+					i = 1;
+				}
+			}
+		}
+		let a = `\\frac{${a_atas}}{${a_bawah}}`;
+		perhitungan = 
+		`
+		\\( (x1, 0) , (x2, 0) , (x, y) \\)<br>
+		\\( (${x1}, ${x1_0}) , (${x2}, ${x2_0}) , (${x}, ${y}) \\)<br><br>
+		\\( y = a(x - x1)(x - x2) \\)<br>
+		\\( ${y} = a(${x} - ${x1})(${x} - ${x2}) \\)<br>
+		\\( ${y} = a(${x - x1})(${x - x2}) \\)<br>
+		\\( ${y} = ${(x - x1) * (x - x2)}a \\)<br>
+		\\( a = \\frac{${y}}{${(x - x1) * (x - x2)}} \\)<br>
+		\\( a = ${a} \\)<br><br>
+		\\( y = a(x - x1)(x - x2) \\)<br>
+		\\( y = ${a}(x + ${-x1})(x + ${-x2}) \\)<br>
+		\\( y = ${a}(x^2 + ${-x2}x + ${-x1}x + ${-x1 * -x2}) \\)<br>
+		\\( y = ${a}(x^2 + ${(-x2) + (-x1)}x + ${-x1 * -x2}) \\)<br>
+		\\( y = ${a}x^2 + \\frac{${a_atas * (-x2 + -x1)}}{${a_bawah}}x + \\frac{${a_atas * (-x1 * -x2)}}{${a_bawah}} \\)<br>
+		\\( y = ${a_atas}x^2 + ${a_atas * (-x2 + -x1)}x + ${a_atas * (-x1 * -x2)} \\)
+		`;
+		perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+		hasil_box6.innerHTML = perhitungan_replace;
+		MathJax.typeset();
+	}
+}
+
+function showhasil_titik_puncak_box6(){
+	let x = Number(x_puncak_box_box6.value);
+	let y = Number(y_puncak_box_box6.value);
+	let xp = Number(xp_puncak_box_box6.value);
+	let yp = Number(yp_puncak_box_box6.value);
+
+	if (isNaN(x) || isNaN(y) || isNaN(xp) || isNaN(yp)) {
+		hasil_box6.innerHTML = "angka!";
+		return;
+	}
+
+	let a_atas = (y-yp);
+	let a_bawah = ((x-xp) ** 2);
+
+	if (a_atas % a_bawah != 0) {
+		if (Math.abs(a_atas) > 0) {
+			for (let i = 2; i <= Math.abs(a_atas); i++) {
+				if (a_atas % i == 0 && a_bawah % i == 0) {
+					a_atas /= i;
+					a_bawah /= i;
+					i = 1;
+				}
+			}
+		}
+		let a =`\\frac{${a_atas}}{${a_bawah}}`;
+
+		perhitungan =
+		`
+		\\( (x, y),(xp, yp) \\)<br>
+		\\( (${x}, ${y}),(${xp}, ${yp}) \\)<br>
+		\\( y = a(x - xp)^2 + yp \\)<br>
+		\\( ${y} = a(${x} - ${xp})^2 + ${yp} \\)<br>
+		\\( ${y} = a(${x - xp})^2 + ${yp} \\)<br>
+		\\( ${y} = a${(x - xp) ** 2} + ${yp} \\)<br>
+		\\( ${(x-xp) ** 2} a = ${y-yp} \\)<br>
+		\\( a = \\frac{${y-yp}}{${(x-xp) ** 2}} \\)<br>
+		\\( a = ${a} \\)<br><br>
+		\\( y = a(x-xp)^2 + yp \\)<br>
+		\\( y = ${a}(x - ${xp})^2 + ${yp} \\)<br>
+		\\( y = ${a}(x - ${xp})(x - ${xp}) + ${yp} \\)<br>
+		\\( y = ${a}(x^2 + ${-xp}x + ${-xp}x + ${-xp * -xp}) + ${yp} \\)<br>
+		\\( y = ${a}(x^2 + ${(-xp) + (-xp)}x + ${-xp * -xp}) + ${yp} \\)<br>
+		\\( y = ${a}x^2 + \\frac{${a_atas * ((-xp)+(-xp))}}{${a_bawah}}x + \\frac{${a_atas * (-xp * -xp)}}{${a_bawah}} + ${yp} \\)<br>
+		\\( y = ${a}x^2 + \\frac{${a_atas * ((-xp)+(-xp))}}{${a_bawah}}x + \\frac{${a_atas * (-xp * -xp)}}{${a_bawah}} + \\frac{${yp}}{1} \\)<br>
+		\\( y = ${a}x^2 + \\frac{${a_atas * ((-xp)+(-xp))}}{${a_bawah}}x + \\frac{${a_atas * (-xp * -xp)}}{${a_bawah}} + \\frac{${yp * (a_bawah)}}{${a_bawah}} \\)<br>
+		\\( y = ${a}x^2 + \\frac{${a_atas * ((-xp)+(-xp))}}{${a_bawah}}x + \\frac{${(a_atas * (-xp * -xp)) + (yp * (a_bawah))}}{${a_bawah}} \\)<br>
+		\\( y = ${a_atas}x^2 + ${a_atas * ((-xp)+(-xp))}x + ${(a_atas * (-xp * -xp)) + (yp * (a_bawah))} \\)
+		`;
+		perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+		hasil_box6.innerHTML = perhitungan_replace;
+		MathJax.typeset();	
+	}else{
+		let a = (a_atas / a_bawah);
+
+		perhitungan =
+		`
+		\\( (x, y),(xp, yp) \\)<br>
+		\\( (${x}, ${y}),(${xp}, ${yp}) \\)<br>
+		\\( y = a(x - xp)^2 + yp \\)<br>
+		\\( ${y} = a(${x} - ${xp})^2 + ${yp} \\)<br>
+		\\( ${y} = a(${x - xp})^2 + ${yp} \\)<br>
+		\\( ${y} = a${(x - xp) ** 2} + ${yp} \\)<br>
+		\\( ${(x-xp) ** 2}a = ${y-yp} \\)<br>
+		\\( a = \\frac{${y - yp}}{${(x - xp) ** 2}} \\)<br>
+		\\( a = ${a} \\)<br><br>
+		\\( y = a(x - xp)^2 + yp \\)<br>
+		\\( y = ${a}(x - ${xp})^2+${yp} \\)<br>
+		\\( y = ${a}(x - ${xp})(x - ${xp}) + ${yp} \\)<br>
+		\\( y = ${a}(x^2 + ${-xp}x + ${-xp}x + ${-xp * -xp}) + ${yp} \\)<br>
+		\\( y = ${a}(x^2 + ${(-xp) + (-xp)}x + ${-xp * -xp}) + ${yp} \\)<br>
+		\\( y = ${a}x^2 + ${a * ((-xp) + (-xp))}x + ${a * ((-xp * -xp))} + ${yp} \\)<br>
+		\\( y = ${a}x^2 + ${a * ((-xp) + (-xp))}x + ${(a * ((-xp) * -xp)) + yp} \\)<br>
+		`;
+		perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+		hasil_box6.innerHTML = perhitungan_replace;
+		MathJax.typeset();	
+	}
+}
+function clear_box_box6(){
+	hasil_box6.innerHTML = "";
+}
+////////////////////////////////////////////////////////////////
 // box 5
 var inputa_box5 = document.getElementById("inputa_box5");
 var inputb_box5 = document.getElementById("inputb_box5");
@@ -10,6 +325,9 @@ function show_hasil_box5(){
 let a = Number(inputa_box5.value)
 let b = Number(inputb_box5.value)
 let c = Number(inputc_box5.value)
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil_box5.innerHTML = "angka!";
+	}
 
 // variabel x1 dan x2 , y , x-simetri , titik-puncak
 let akar_diskriminan =  Math.sqrt((b ** 2) + (-4 * a * c));
@@ -27,7 +345,11 @@ let pemfaktoran_akalic = a * c;
     for (let x1 = pemfaktoran_akalic; x1 <= -pemfaktoran_akalic + 1; x1++) {
  		var x2 =  pemfaktoran_akalic / x1;
     	if (pemfaktoran_akalic / x1 == x2 && x2 + x1 == b) {
-			return  `\\( (${x1}) + (${x2}) = ${b} \\)<br>\\( (${x1}) x (${x2}) = ${c} \\)<br>\\( (x + (${x1}))(x + (${x2})) = 0 \\)<br>\\( x = ${-x1} || x = ${-x2} \\)<br>\\( (${-x1}, 0) (${-x2}, 0) \\)`
+			return  `\\( ${x1} + ${x2} = ${b} \\)<br>
+			\\( ${x1} x ${x2} = ${pemfaktoran_akalic} \\)<br>
+			\\( (x + ${x1})(x + ${x2}) = 0 \\)<br>
+			\\( ${a}x = ${-x1} ||| ${a}x = ${-x2} \\)<br>
+			\\( (${-x1 / a}, 0) (${-x2 / a}, 0) \\)`
     	} else if (x1 == -pemfaktoran_akalic + 1) {
 		alert("pemfaktoran gagal")	
 	}
@@ -38,7 +360,11 @@ let pemfaktoran_akalic = a * c;
     for (let x1 = -pemfaktoran_akalic; x1 <= pemfaktoran_akalic + 1; x1++) {
  		let x2 =  pemfaktoran_akalic / x1;
     	if (pemfaktoran_akalic / x1 == x2 && x2 + x1 == b) {
-			return  `\\( (${x1}) + (${x2}) = ${b} \\)<br>\\( (${x1}) x (${x2}) = ${c} \\)<br>\\( (x + (${x1}))(x + (${x2})) = 0 \\)<br>\\( x = ${-x1} || x = ${-x2} \\)<br>\\( (${-x1}, 0) (${-x2}, 0) \\)`
+			return  `\\( ${x1} + ${x2} = ${b} \\)<br>
+			\\( ${x1} x ${x2} = ${pemfaktoran_akalic} \\)<br>
+			\\( (x + ${x1})(x + ${x2}) = 0 \\)<br>
+			\\( ${a}x = ${-x1} ||| ${a}x = ${-x2} \\)<br>
+			\\( (${-x1 / a}, 0) (${-x2 / a}, 0) \\)`
     	} else if (x1 == pemfaktoran_akalic + 1) {
 		alert("pemfaktoran gagal")
 	}
@@ -47,50 +373,77 @@ let pemfaktoran_akalic = a * c;
     if (pemfaktoran_akalic == 0) {
     	let x1 = b;
     	let x2 = 0;
-			return  `\\( (${x1}) + (${x2}) = ${b} \\)<br>\\( (${x1}) x (${x2}) = ${c} \\)<br>\\( (x + (${x1}))(x + (${x2})) = 0 \\)<br>\\( x = ${-x1} || x = ${-x2} \\)<br>\\( (${-x1}, 0) (${-x2}, 0) \\)`
+			return  `\\( ${x1} + ${x2} = ${b} \\)<br>
+			\\( ${x1} x ${x2} = ${pemfaktoran_akalic} \\)<br>
+			\\( (x + ${x1})(x + ${x2}) = 0 \\)<br>
+			\\( ${a}x = ${-x1} ||| ${a}x = ${-x2} \\)<br>
+			\\( (${-x1 / a}, 0) (${-x2 / a}, 0) \\)`
     }
 }
 
-hasil_box5.innerHTML =
+let perhitungan =
 `
 \\( f(x) = ax^2 + bx + c \\)<br>
-\\( y = ${a}x^2 + (${b})x + (${c}) \\)<br><br>
+\\( y = ${a}x^2 + ${b}x + ${c} \\)<br><br>
 1) titik sumbu x,y=0<br>
-\\( y = ${a}x^2 + (${b})x + (${c}) \\)<br>
-\\( ${a}x^2 + (${b})x + (${c}) = 0 \\)<br>
+\\( y = ${a}x^2 + ${b}x + ${c} \\)<br>
+\\( ${a}x^2 + ${b}x + ${c} = 0 \\)<br>
 ${pemfaktoran_di_langkah1_box5()}<br><br>
 2) titik sumbu y,x=0<br>
-\\( y = ${a}x^2 + (${b})x + (${c}) \\)<br>
-\\( y = (${a})(0)^2 + (${b})(0) + (${c}) \\)<br>
+\\( y = ${a}x^2 + ${b}x + ${c} \\)<br>
+\\( y = ${a}.(0)^2 + ${b}.0 + ${c} \\)<br>
 \\( y = ${c} \\)<br>
 \\( (0, ${c}) \\)<br><br>
 3) sumbu simetri<br>
 \\( x = \\frac{-b}{2a} \\)<br>
 \\( x = \\frac{-(${b})}{2(${a})} \\)<br>
-\\( x = \\frac{${-b}}{${2 * a}}) \\)<br>
+\\( x = \\frac{${-b}}{${2 * a}} \\)<br>
 \\( x = ${(-b) / (2 * a)} \\)<br><br>
 4) titik puncah<br>
 \\( p(\\frac{-b}{2a}, \\frac{-d}{4a}) \\)<br>
 \\( p(${sumbu_simetri}, \\frac{-(${diskriminan})}{4(${a})}) \\)<br>
 \\( p(${sumbu_simetri}, \\frac{${-diskriminan}}{${4 * a}}) \\)<br>
 \\( p(${sumbu_simetri}, ${(-diskriminan) / (4 * a)}) \\)<br>
-
 \\( d = b^2 - 4ac \\)<br>
-\\( d = (${b})^2 - 4(${a})(${c}) \\)<br>
-\\( d = ${b ** 2} + (${-4 * a * c}) \\)<br>
+\\( d = (${b})^2 - 4.${a}.${c} \\)<br>
+\\( d = ${b ** 2} + ${-4 * a * c} \\)<br>
 \\( d = ${(b ** 2) + (-4 * a * c)} \\)
 `;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box5.innerHTML = perhitungan_replace;
 MathJax.typeset();
 }
 
 
-var canvas = document.getElementById("myCanvas_box5");
+const canvas = document.getElementById("myCanvas_box5");
 canvas.hidden = true;
 
+patokan_if_zoom_canvas_box5 = 0;
+myCanvas_box5.onclick = function(){
+	zoom_canvas_box5()
+	function zoom_canvas_box5(){
+		const ctx = canvas.getContext("2d");
+		patokan_if_zoom_canvas_box5++;
+		if (patokan_if_zoom_canvas_box5 % 2 == 1) {
+			canvas.width = "1000";
+			canvas.height = "1000";
+			ctx.scale(2,2);
+			show_grafik_box5();
+		}else{
+			canvas.width = "500";
+			canvas.height = "500";
+			ctx.scale(1,1);
+			show_grafik_box5();
+		}
+		}
+}
 function show_grafik_box5(){
 let a = Number(inputa_box5.value)
 let b = Number(inputb_box5.value)
 let c = Number(inputc_box5.value)
+if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return canvas.hidden = true;
+	}
 
 // variabel x1 dan x2 , y , x-simetri , titik-puncak
 let akar_diskriminan =  Math.sqrt((b ** 2) + (-4 * a * c));
@@ -104,9 +457,12 @@ let titik_puncak = (-diskriminan) / (4 * a);
 
 var ctx = canvas.getContext("2d");
 canvas.hidden = false;
-ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+ctx.clearRect(0, 0, canvas.width, canvas.height);
 // canvas grafik!
+ctx.font = "15px arial";
+ctx.fillText("click = x2(responsive)",0,15);
+
 ctx.beginPath();
 ctx.moveTo(250, 90);
 ctx.lineTo(250, 410);
@@ -126,7 +482,6 @@ ctx.stroke();
 x_xpositif += 10;
 }
 ctx.font = "10px arial";
-ctx.fillText("x",410,250);
 
 let x_xnegatif = 240;
 for(let i = 1;i<=15;i++){
@@ -233,138 +588,87 @@ if (titik_sumbu_x2 > 0 && titik_sumbu_x1 > 0) {
 	ctx.fillText(`P(${sumbu_simetri} , ${titik_puncak})`,(250 + (sumbu_simetri * 10)) + 20, 250 - (titik_puncak * 10));
 }
 }
+function clear_box5(){
+	hasil_box5.innerHTML = "";
+	canvas.hidden = true;
+}
 ////////////////////////////////////////////////////////////////
-// box 4
-var hasil_box4 = document.getElementById("hasil_box4");
+const hasil_box4 = document.getElementById("hasil_box4");
 // default
-var x1_box4 = document.getElementById("inputx1_box4");
-var x2_box4 = document.getElementById("inputx2_box4");
-var btn_box4 = document.getElementById("btn_box4");
-var btn2_box4 = document.getElementById("btn2_box4");
-// 1 pecahan
-var x1_box4_pecahan1 = document.getElementById("inputx1_box4_pecahan1");
-var x2_box4_pecahan1_pembilang = document.getElementById("inputx2_box4_pecahan1_pembilang");
-var x2_box4_pecahan1_penyebut = document.getElementById("inputx2_box4_pecahan1_penyebut");
-var btn_box4_pecahan1 = document.getElementById("btn_box4_pecahan1");
-var btn2_box4_pecahan1 = document.getElementById("btn2_box4_pecahan1");
-var per_nya_pecahan1_box4 = document.getElementById("per_nya_pecahan1_box4");
-// 2 pecahan
-var x1_box4_pecahan2_pembilang = document.getElementById("inputx1_box4_pecahan2_pembilang");
-var x1_box4_pecahan2_penyebut = document.getElementById("inputx1_box4_pecahan2_penyebut");
-var x2_box4_pecahan2_pembilang = document.getElementById("inputx2_box4_pecahan2_pembilang");
-var x2_box4_pecahan2_penyebut = document.getElementById("inputx2_box4_pecahan2_penyebut");
-var btn_box4_pecahan2 = document.getElementById("btn_box4_pecahan2");
-var btn2_box4_pecahan2 = document.getElementById("btn2_box4_pecahan2");
-var per_nya_pecahan2_box4 = document.getElementById("per_nya_pecahan2_box4");
-var per2_nya_pecahan2_box4 = document.getElementById("per2_nya_pecahan2_box4");
+let x1_box4 = document.getElementById("inputx1_box4");
+let x2_box4 = document.getElementById("inputx2_box4");
+//pecahan1
+let x1_box4_pecahan1 = document.getElementById("inputx1_box4_pecahan1");
+let x2_box4_pecahan1_pembilang = document.getElementById("inputx2_box4_pecahan1_pembilang");
+let x2_box4_pecahan1_penyebut = document.getElementById("inputx2_box4_pecahan1_penyebut");
+//pecahan2
+let x1_box4_pecahan2_pembilang = document.getElementById("inputx1_box4_pecahan2_pembilang");
+let x1_box4_pecahan2_penyebut = document.getElementById("inputx1_box4_pecahan2_penyebut");
+let x2_box4_pecahan2_pembilang = document.getElementById("inputx2_box4_pecahan2_pembilang");
+let x2_box4_pecahan2_penyebut = document.getElementById("inputx2_box4_pecahan2_penyebut");
+
+
+const default_box_box4 = document.getElementById("default_box_box4");
+const pecahan1_box_box4 = document.getElementById("pecahan1_box_box4");
+const pecahan2_box_box4 = document.getElementById("pecahan2_box_box4");
 // default
-x1_box4.hidden = false;
-x2_box4.hidden = false;
-btn_box4.hidden = false;
-btn2_box4.hidden = false;
-x1_box4_pecahan1.hidden = true;
-x2_box4_pecahan1_pembilang.hidden = true;
-x2_box4_pecahan1_penyebut.hidden = true;
-btn_box4_pecahan1.hidden = true;
-btn2_box4_pecahan1.hidden = true;
-per_nya_pecahan1_box4.hidden = true;
-x1_box4_pecahan2_pembilang.hidden = true;
-x1_box4_pecahan2_penyebut.hidden = true;
-x2_box4_pecahan2_pembilang.hidden = true;
-x2_box4_pecahan2_penyebut.hidden = true;
-btn_box4_pecahan2.hidden = true;
-btn2_box4_pecahan2.hidden = true;
-per_nya_pecahan2_box4.hidden = true;
-per2_nya_pecahan2_box4.hidden = true;
+default_box_box4.hidden = false;
+pecahan1_box_box4.hidden = true;
+pecahan2_box_box4.hidden = true;
 
 function default_box4(){
-	x1_box4.hidden = false;
-	x2_box4.hidden = false;
-	btn_box4.hidden = false;
-	btn2_box4.hidden = false;
-	x1_box4_pecahan1.hidden = true;
-	x2_box4_pecahan1_pembilang.hidden = true;
-	x2_box4_pecahan1_penyebut.hidden = true;
-	btn_box4_pecahan1.hidden = true;
-	btn2_box4_pecahan1.hidden = true;
-	per_nya_pecahan1_box4.hidden = true;
-	x1_box4_pecahan2_pembilang.hidden = true;
-	x1_box4_pecahan2_penyebut.hidden = true;
-	x2_box4_pecahan2_pembilang.hidden = true;
-	x2_box4_pecahan2_penyebut.hidden = true;
-	btn_box4_pecahan2.hidden = true;
-	btn2_box4_pecahan2.hidden = true;
-	per_nya_pecahan2_box4.hidden = true;
-	per2_nya_pecahan2_box4.hidden = true;
+	default_box_box4.hidden = false;
+	pecahan1_box_box4.hidden = true;
+	pecahan2_box_box4.hidden = true;
 	hasil_box4.innerHTML = "";
 }
 function pecahan1_box4(){
-	x1_box4.hidden = true;
-	x2_box4.hidden = true;
-	btn_box4.hidden = true;
-	btn2_box4.hidden = true;
-	x1_box4_pecahan1.hidden = false;
-	x2_box4_pecahan1_pembilang.hidden = false;
-	x2_box4_pecahan1_penyebut.hidden = false;
-	btn_box4_pecahan1.hidden = false;
-	btn2_box4_pecahan1.hidden = false;
-	per_nya_pecahan1_box4.hidden = false;
-	x1_box4_pecahan2_pembilang.hidden = true;
-	x1_box4_pecahan2_penyebut.hidden = true;
-	x2_box4_pecahan2_pembilang.hidden = true;
-	x2_box4_pecahan2_penyebut.hidden = true;
-	btn_box4_pecahan2.hidden = true;
-	btn2_box4_pecahan2.hidden = true;
-	per_nya_pecahan2_box4.hidden = true;
-	per2_nya_pecahan2_box4.hidden = true;
+	default_box_box4.hidden = true;
+	pecahan1_box_box4.hidden = false;
+	pecahan2_box_box4.hidden = true;
 	hasil_box4.innerHTML = "";
 }
 function pecahan2_box4(){
-	x1_box4.hidden = true;
-	x2_box4.hidden = true;
-	btn_box4.hidden = true;
-	btn2_box4.hidden = true;
-	x1_box4_pecahan1.hidden = true;
-	x2_box4_pecahan1_pembilang.hidden = true;
-	x2_box4_pecahan1_penyebut.hidden = true;
-	btn_box4_pecahan1.hidden = true;
-	btn2_box4_pecahan1.hidden = true;
-	per_nya_pecahan1_box4.hidden = true;
-	x1_box4_pecahan2_pembilang.hidden = false;
-	x1_box4_pecahan2_penyebut.hidden = false;
-	x2_box4_pecahan2_pembilang.hidden = false;
-	x2_box4_pecahan2_penyebut.hidden = false;
-	btn_box4_pecahan2.hidden = false;
-	btn2_box4_pecahan2.hidden = false;
-	per_nya_pecahan2_box4.hidden = false;
-	per2_nya_pecahan2_box4.hidden = false;
+	default_box_box4.hidden = true;
+	pecahan1_box_box4.hidden = true;
+	pecahan2_box_box4.hidden = false;
 	hasil_box4.innerHTML = "";
 }
 
 function cara1_box4(){
 	let x1 = Number(x1_box4.value)
 	let x2 = Number(x2_box4.value)
+	if (isNaN(x1) || isNaN(x2)) {
+		return hasil_box4.innerHTML = "angka!";
+	}
 
-	hasil_box4.innerHTML =
+	let perhitungan =
 	`
-	\\( (x-x1)(x-x2) = 0 \\)<br>
-	\\( (x-(${x1}))(x-(${x2})) = 0 \\)<br>
-	\\( x^2+(${-x2})x+(${-x1})x+(${-x1 * -x2}) = 0 \\)<br>
-	\\( x^2+(${-x2 + -x1})+(${-x1 * -x2}) = 0 \\)
-	`
+	\\( (x - x1)(x - x2) = 0 \\)<br>
+	\\( (x - ${x1})(x - ${x2}) = 0 \\)<br>
+	\\( x^2 + ${-x2}x + ${-x1}x + ${-x1 * -x2} = 0 \\)<br>
+	\\( x^2 + ${-x2 + -x1}x + ${-x1 * -x2} = 0 \\)
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box4.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
 
 function cara2_box4(){
 	let x1 = Number(x1_box4.value)
 	let x2 = Number(x2_box4.value)
+	if (isNaN(x1) || isNaN(x2)) {
+		return hasil_box4.innerHTML = "angka!";
+	}
 
-	hasil_box4.innerHTML =
+	let perhitungan =
 	`
-	\\( x^2-(x1+x2)x+x1.x2 = 0 \\)<br>
-	\\( x^2-((${x1})+(${x2}))x+(${x1}).(${x2}) = 0 \\)<br>
-	\\( x^2+(${-(x1 + x2)})x+(${x1 * x2}) = 0 \\)
+	\\( x^2 - (x1 + x2)x + x1.x2 = 0 \\)<br>
+	\\( x^2 - (${x1} + ${x2})x + ${x1}.${x2} = 0 \\)<br>
+	\\( x^2 + ${-(x1 + x2)}x + ${x1 * x2} = 0 \\)
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box4.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
 
@@ -372,18 +676,24 @@ function cara1_box4_1pecahan(){
 	let x1 = Number(x1_box4_pecahan1.value)
 	let x2_pembilang = Number(x2_box4_pecahan1_pembilang.value) 
 	let x2_penyebut = Number(x2_box4_pecahan1_penyebut.value)
-
-	hasil_box4.innerHTML =
+	if (isNaN(x1) || isNaN(x2_pembilang) || isNaN(x2_penyebut)) {
+		return hasil_box4.innerHTML = "angka!";
+	}
+	if (x1_penyebut == 0 ) {
+		return hasil_box4.innerHTML = "penyebut tidak ada yg nol!"
+	}
+	let perhitungan =
 	`
-	\\( (x-x1)(x-x2) = 0 \\)<br>
-	\\( (x-(${x1}))(x-( \\frac{${x2_pembilang}}{${x2_penyebut}})) = 0 \\)<br>
-	\\( (x+(${-x1}))(x+( \\frac{${-x2_pembilang}}{${x2_penyebut}})) = 0 \\)<br>
-	\\( x^2+( \\frac{${-x2_pembilang}}{${x2_penyebut}})x+(${-x1})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( x^2+( \\frac{${-x2_pembilang}}{${x2_penyebut}} + \\frac{${-x1}}{1})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( x^2+( \\frac{${-x2_pembilang}}{${x2_penyebut}} + \\frac{${-x1 * x2_penyebut}}{${x2_penyebut}})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( x^2+( \\frac{${-x2_pembilang + (-x1 * x2_penyebut)}}{${x2_penyebut}})x+( \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( ${x2_penyebut}x^2+(${-x2_pembilang + (-x1 * x2_penyebut)})x+(${-x2_pembilang * -x1}) = 0 \\)
+	\\( (x - x1)(x - x2) = 0 \\)<br>
+	\\( (x + ${-x1})(x + \\frac{${-x2_pembilang}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2 + \\frac{${-x2_pembilang}}{${x2_penyebut}}x + ${-x1}x+ \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}} = 0 \\)<br>
+	\\( x^2 + ( \\frac{${-x2_pembilang}}{${x2_penyebut}} + \\frac{${-x1}}{1})x + \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}} = 0 \\)<br>
+	\\( x^2 + ( \\frac{${-x2_pembilang}}{${x2_penyebut}} + \\frac{${-x1 * x2_penyebut}}{${x2_penyebut}})x + \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}} = 0 \\)<br>
+	\\( x^2 + \\frac{${-x2_pembilang + (-x1 * x2_penyebut)}}{${x2_penyebut}}x + \\frac{${-x2_pembilang * -x1}}{${x2_penyebut}} = 0 \\)<br>
+	\\( ${x2_penyebut}x^2 + ${-x2_pembilang + (-x1 * x2_penyebut)}x+${-x2_pembilang * -x1} = 0 \\)
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box4.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
 
@@ -391,17 +701,24 @@ function cara2_box4_1pecahan(){
 	let x1 = Number(x1_box4_pecahan1.value)
 	let x2_pembilang = Number(x2_box4_pecahan1_pembilang.value) 
 	let x2_penyebut = Number(x2_box4_pecahan1_penyebut.value)
-
-	hasil_box4.innerHTML =
+	if (isNaN(x1) || isNaN(x2_pembilang) || isNaN(x2_penyebut)) {
+		return hasil_box4.innerHTML = "angka!";
+	}
+	if (x1_penyebut == 0 ) {
+		return hasil_box4.innerHTML = "penyebut tidak ada yg nol!"
+	}
+	let perhitungan =
 	`
-	\\( x^2-(x1+x2)x+x1.x2 = 0 \\)<br>
-	\\( x^2-(${x1}+\\frac{${x2_pembilang}}{${x2_penyebut}})x+(${x1}).(\\frac{${x2_pembilang}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( x^2-(\\frac{${x1}}{1}+\\frac{${x2_pembilang}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( x^2-(\\frac{${x1 * x2_penyebut}}{${x2_penyebut}}+\\frac{${x2_pembilang}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) = 0 \\)<br>
-	\\( x^2-(\\frac{${(x1 * x2_penyebut) + x2_pembilang}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) \\)<br>
-	\\( x^2+(\\frac{${-((x1 * x2_penyebut) + x2_pembilang)}}{${x2_penyebut}})x+(\\frac{${x2_pembilang * x1}}{${x2_penyebut}}) \\)<br>
-	\\( ${x2_penyebut}x^2+(${-((x1 * x2_penyebut) + x2_pembilang)})x+(${x2_pembilang * x1}) = 0 \\)
+	\\( x^2 - (x1 + x2)x + x1.x2 = 0 \\)<br>
+	\\( x^2 - (${x1} + \\frac{${x2_pembilang}}{${x2_penyebut}})x + ${x1}.\\frac{${x2_pembilang}}{${x2_penyebut}} = 0 \\)<br>
+	\\( x^2 - (\\frac{${x1}}{1} + \\frac{${x2_pembilang}}{${x2_penyebut}})x + \\frac{${x2_pembilang * x1}}{${x2_penyebut}} = 0 \\)<br>
+	\\( x^2 - (\\frac{${x1 * x2_penyebut}}{${x2_penyebut}} + \\frac{${x2_pembilang}}{${x2_penyebut}})x + \\frac{${x2_pembilang * x1}}{${x2_penyebut}} = 0 \\)<br>
+	\\( x^2 - \\frac{${(x1 * x2_penyebut) + x2_pembilang}}{${x2_penyebut}}x + \\frac{${x2_pembilang * x1}}{${x2_penyebut}} \\)<br>
+	\\( x^2 + \\frac{${-((x1 * x2_penyebut) + x2_pembilang)}}{${x2_penyebut}}x + \\frac{${x2_pembilang * x1}}{${x2_penyebut}} \\)<br>
+	\\( ${x2_penyebut}x^2 + ${-((x1 * x2_penyebut) + x2_pembilang)}x + ${x2_pembilang * x1} = 0 \\)
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box4.innerHTML = perhitungan_replace;
 	MathJax.typeset();	
 }
 function cara1_box4_2pecahan(){
@@ -409,16 +726,24 @@ function cara1_box4_2pecahan(){
 	let x1_penyebut = Number(x1_box4_pecahan2_penyebut.value)
 	let x2_pembilang = Number(x2_box4_pecahan2_pembilang.value)
 	let x2_penyebut = Number(x2_box4_pecahan2_penyebut.value)
-
-	hasil_box4.innerHTML =
+	if (isNaN(x1_pembilang) || isNaN(x1_penyebut) || isNaN(x2_pembilang) || isNaN(x2_penyebut)) {
+		return hasil_box4.innerHTML = "angka!";
+	}
+	if (x1_penyebut == 0 || x2_penyebut == 0) {
+		return hasil_box4.innerHTML = "penyebut tidak ada yg nol!"
+	}
+	let perhitungan =
 	`
-	\\( (x-x1)(x-x2)=0 \\)<br>
-	\\( (x-(\\frac{${x1_pembilang}}{${x1_penyebut}}))(x-(\\frac{${x2_pembilang}}{${x2_penyebut}}))=0 \\)<br>
-	\\( x^2+(\\frac{${-x2_pembilang}}{${x2_penyebut}})x+(\\frac{${-x1_pembilang}}{${x1_penyebut}})x+(\\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}})=0 \\)<br>
-	\\( x^2+(\\frac{${((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang}}{${x2_penyebut * x1_penyebut}})x+(\\frac{${((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang}}{${x2_penyebut * x1_penyebut}})x+(\\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}})=0 \\)<br>
-	\\( x^2+(\\frac{${(((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang) + (((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang)}}{${x2_penyebut * x1_penyebut}})x+(\\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}}) =0 \\)<br>
-	\\( ${x2_penyebut * x1_penyebut}x^2+(${(((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang) + (((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang)})x+(${-x2_pembilang * -x1_pembilang})=0 \\)	
+	\\( (x - x1)(x - x2)=0 \\)<br>
+	\\( (x - (\\frac{${x1_pembilang}}{${x1_penyebut}}))(x - (\\frac{${x2_pembilang}}{${x2_penyebut}})) = 0 \\)<br>
+	\\( (x + \\frac{${-x1_pembilang}}{${x1_penyebut}})(x + \\frac{${-x2_pembilang}}{${x2_penyebut}}) = 0 \\)<br>
+	\\( x^2 + \\frac{${-x2_pembilang}}{${x2_penyebut}}x + \\frac{${-x1_pembilang}}{${x1_penyebut}}x + \\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}} = 0 \\)<br>
+	\\( x^2 + \\frac{${((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang}}{${x2_penyebut * x1_penyebut}}x + \\frac{${((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang}}{${x2_penyebut * x1_penyebut}}x + \\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}} = 0 \\)<br>
+	\\( x^2 + \\frac{${(((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang) + (((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang)}}{${x2_penyebut * x1_penyebut}}x + \\frac{${-x2_pembilang * -x1_pembilang}}{${x2_penyebut * x1_penyebut}} = 0 \\)<br>
+	\\( ${x2_penyebut * x1_penyebut}x^2 + ${(((x2_penyebut * x1_penyebut) / x2_penyebut) * -x2_pembilang) + (((x2_penyebut * x1_penyebut) / x1_penyebut) * -x1_pembilang)}x + ${-x2_pembilang * -x1_pembilang} = 0 \\)	
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box4.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
 function cara2_box4_2pecahan(){
@@ -426,18 +751,28 @@ function cara2_box4_2pecahan(){
 	let x1_penyebut = Number(x1_box4_pecahan2_penyebut.value)
 	let x2_pembilang = Number(x2_box4_pecahan2_pembilang.value)
 	let x2_penyebut = Number(x2_box4_pecahan2_penyebut.value)
+	if (isNaN(x1_pembilang) || isNaN(x1_penyebut) || isNaN(x2_pembilang) || isNaN(x2_penyebut)) {
+		return hasil_box4.innerHTML = "angka!";
+	}
+	if (x1_penyebut == 0 || x2_penyebut == 0) {
+		return hasil_box4.innerHTML = "penyebut tidak ada yg nol!"
+	}
 
-	hasil_box4.innerHTML =
+	perhitungan =
 	`
 	\\( x^2-(x1+x2)x+x1.x2=0 \\)<br>
 	\\( x^2-((\\frac{${x1_pembilang}}{${x1_penyebut}})+(\\frac{${x2_pembilang}}{${x2_penyebut}}))x+(\\frac{${x1_pembilang}}{${x1_penyebut}}).(\\frac{${x2_pembilang}}{${x2_penyebut}})=0 \\)<br>
 	\\( x^2-(\\frac{${((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang}+${((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang}}{${x1_penyebut * x2_penyebut}})x+(\\frac{${x1_pembilang * x2_pembilang}}{${x1_penyebut * x2_penyebut}})=0 \\)<br>
 	\\( x^2+(\\frac{${-((((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang) + (((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang))}}{${x1_penyebut * x2_penyebut}})x+(\\frac{${x1_pembilang * x2_pembilang}}{${x1_penyebut * x2_penyebut}})=0 \\)<br>
-	\\( ${x1_penyebut * x2_penyebut}x^2+(${-((((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang) + (((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang))})x+(${x1_pembilang * x2_pembilang})=0 \\)
+	\\( ${x1_penyebut * x2_penyebut}x^2 + ${-((((x1_penyebut * x2_penyebut) / x1_penyebut) * x1_pembilang) + (((x1_penyebut * x2_penyebut) / x2_penyebut) * x2_pembilang))}x + ${x1_pembilang * x2_pembilang}=0 \\)
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box4.innerHTML = perhitungan_replace;
 	MathJax.typeset();	
 }
-
+function clear_box4(){
+	hasil_box4.innerHTML = "";
+}
 
 
 ////////////////////////////////////////////////////////////////
@@ -452,6 +787,9 @@ function hasil_satu_box3(){
 let a = Number(inputa_box3.value)
 let b = Number(inputb_box3.value)
 let c = Number(inputc_box3.value)
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil_box3.innerHTML = "angka!";
+	}
 
 	hasil_box3.innerHTML = 
 	`
@@ -468,6 +806,9 @@ function hasil_dua_box3(){
 let a = Number(inputa_box3.value)
 let b = Number(inputb_box3.value)
 let c = Number(inputc_box3.value)
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil_box3.innerHTML = "angka!";
+	}
 
 	hasil_box3.innerHTML = 
 	`
@@ -484,16 +825,21 @@ function hasil_tiga_box3(){
 let a = Number(inputa_box3.value)
 let b = Number(inputb_box3.value)
 let c = Number(inputc_box3.value)
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil_box3.innerHTML = "angka!";
+	}
 
-	hasil_box3.innerHTML = 
+	let perhitungan = 
 	`
 	ax<sup>2</sup> + bx + c = 0<br>
 	a = ${a} , b = ${b} , c = ${c}<br><br>
-	\\( x1^2+x2^2 \\) = \\( (x1+x2)^2 - 2(x1.x2) \\)<br>
+	\\( x1^2+x2^2 \\) = \\( (x1 + x2)^2 - 2(x1.x2) \\)<br>
 	\\( x1^2+x2^2 \\) = \\( ${-b/a}^2 - 2.${c/a} \\)<br>
 	\\( x1^2+x2^2 \\) = \\( ${(-b/a) ** 2} + ${-2*c/a} \\)<br>
 	\\( x1^2+x2^2 \\) = \\(${((-(b/a)) ** 2) + (-2*c/a)} \\)
 	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box3.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
 
@@ -501,6 +847,9 @@ function hasil_empat_box3(){
 let a = Number(inputa_box3.value)
 let b = Number(inputb_box3.value)
 let c = Number(inputc_box3.value)
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil_box3.innerHTML = "angka!";
+	}
 
 	hasil_box3.innerHTML = 
 	`
@@ -517,6 +866,9 @@ function hasil_lima_box3(){
 let a = Number(inputa_box3.value)
 let b = Number(inputb_box3.value)
 let c = Number(inputc_box3.value)
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil_box3.innerHTML = "angka!";
+	}
 
 	hasil_box3.innerHTML = 
 	`
@@ -527,6 +879,9 @@ let c = Number(inputc_box3.value)
 	\\( \\frac{x1}{x2}+\\frac{x2}{x1} \\) = \\(${(((-(b/a)) ** 2) + (-2*c/a))/(c/a)} \\)
 	`;
 	MathJax.typeset();
+}
+function clear_box3(){
+	hasil_box3.innerHTML = "";
 }
 ////////////////////////////////////////////////////////////////
 // box2
@@ -543,63 +898,71 @@ function hasilfaktor_box2(){
 	let khususmin_diskriminan = -((b_box2 ** 2) + (-4 * a_box2 * c_box2));
 	let akar_diskriminan =  Math.sqrt((b_box2 ** 2) + (-4 * a_box2 * c_box2));
     let khususmin_akar_diskriminan = Math.sqrt(-((b_box2 ** 2) + (-4 * a_box2 * c_box2)));
+    if (isNaN(a_box2) || isNaN(b_box2) || isNaN(c_box2)) {
+		return hasil_box2.innerHTML = "angka!";
+	}
 
 if (diskriminan > 0) {
 	if (diskriminan % akar_diskriminan == 0){
-		hasil_box2.innerHTML = 
+	let perhitungan = 
 	`
 	x<sub>1,2</sub> = \\( \\frac{-b \\pm \\sqrt{b^2- 4ac}}{2a} \\) <br>
 	x<sub>1,2</sub> = \\( \\frac{-(${b_box2}) \\pm \\sqrt{(${b_box2})^2 - 4.(${a_box2}).(${c_box2})}}{2.(${a_box2})} \\)<br>
-	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{(${b_box2 ** 2}) + (${-4 * a_box2 * c_box2})}}{${2 * a_box2}} \\) <br>
-	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{(${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})}}{${2 * a_box2}} \\)<br>
+	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + ${-4 * a_box2 * c_box2}}}{${2 * a_box2}} \\) <br>
+	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${(b_box2 ** 2) + (-4 * a_box2 * c_box2)}}}{${2 * a_box2}} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm ${akar_diskriminan}}{${2 * a_box2}} \\) <br>
 	<br>
 	x<sub>1</sub> = \\( \\frac{${-b_box2} + ${akar_diskriminan}}{${2 * a_box2}} \\) <br>
-	x<sub>1</sub> = ${-b_box2 + akar_diskriminan} / ${2 * a_box2}<br>
 	x<sub>1</sub> = \\( \\frac{${-b_box2 + akar_diskriminan}}{${2 * a_box2}} \\)<br>
 	x<sub>1</sub> = \\( ${(-b_box2 + akar_diskriminan) / (2 * a_box2)} \\)<br>
 	<br>
 	x<sub>2</sub> = \\( \\frac{${-b_box2} - ${akar_diskriminan}}{${2 * a_box2}} \\)<br>
 	x<sub>2</sub> = \\( \\frac{${-b_box2 - akar_diskriminan}}{${2 * a_box2}} \\)<br>
 	x<sub>2</sub> = \\( ${(-b_box2 - akar_diskriminan) / (2 * a_box2)} \\)<br>
-	`
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box2.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 	}
 	else if (diskriminan % akar_diskriminan != 0) {
-			hasil_box2.innerHTML = 
+	let perhitungan =
 	`
 	x<sub>1,2</sub> = \\( \\frac{-b \\pm \\sqrt{(b^2 - 4ac))}}{2a} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{-(${b_box2}) \\pm \\sqrt{(${b_box2})^2 - 4.(${a_box2}).(${c_box2})}}{2.(${a_box2})} \\)<br>
-	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + (${-4 * a_box2 * c_box2})}}{${2 * a_box2}} \\)<br>
+	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + ${-4 * a_box2 * c_box2}}}{${2 * a_box2}} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{(${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})}}{${2 * a_box2}} \\)<br>
 	<br>
 	x<sub>1</sub> = \\( \\frac{${-b_box2} + \\sqrt{(${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})}}{${2 * a_box2}} \\)<br>
 	<br>
 	x<sub>2</sub> = \\( \\frac{${-b_box2} - \\sqrt{(${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})}}{${2 * a_box2}} \\)<br>
-	`
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box2.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 	}
 }
 else if (diskriminan == 0){
-		hasil_box2.innerHTML = 
+	let perhitungan =
 	`
 	x<sub>1,2</sub> = \\( \\frac{-b \\pm \\sqrt{(b^2 - 4ac))}}{2a} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{-(${b_box2}) \\pm \\sqrt{(${b_box2})^2 - 4.(${a_box2}).(${c_box2})}}{2.(${a_box2})} \\)<br>
-	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + (${-4 * a_box2 * c_box2})}}{${2 * a_box2}} \\)<br>
+	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + ${-4 * a_box2 * c_box2}}}{${2 * a_box2}} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{(${(b_box2 ** 2) + (-4 * a_box2 * c_box2)})}}{${2 * a_box2}} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm ${akar_diskriminan}}{${2 * a_box2}} \\)   <<<  hanya memiliki 1 nilai<br>
 	x = \\( \\frac{${-b_box2}}{${2 * a_box2}} \\)<br>
 	x = ${-b_box2 / (2 * a_box2)}<br>
-	`
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box2.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
 else if (diskriminan < 0){
 	if (khususmin_diskriminan % khususmin_akar_diskriminan == 0) {
-		hasil_box2.innerHTML = 
+		let perhitungan =
 	`
 	x<sub>1,2</sub> = \\( \\frac{-b \\pm \\sqrt{(b^2 - 4ac))}}{2a} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{-(${b_box2}) \\pm \\sqrt{(${b_box2})^2 - 4.(${a_box2}).(${c_box2})}}{2.(${a_box2})} \\)<br>
-	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + (${-4 * a_box2 * c_box2})}}{${2 * a_box2}} \\)<br>
+	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + ${-4 * a_box2 * c_box2}}}{${2 * a_box2}} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${(b_box2 ** 2) + (-4 * a_box2 * c_box2)}}}{${2 * a_box2}} \\) <<< tidak ada penyelesaian,karena nilai akar selalu positif <br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm ${khususmin_akar_diskriminan}i}{${2 * a_box2}} \\) <<< jika ingin dilanjutkan menggunakan bilangan imajiner<br>
 	<br>
@@ -609,14 +972,16 @@ else if (diskriminan < 0){
 	x<sub>2</sub> = \\( \\frac{${-b_box2} - ${khususmin_akar_diskriminan}i}{${2 * a_box2}} \\)<br>
 	x<sub>2</sub> = \\( ${(-b_box2 / (2 * a_box2))} + ${(-khususmin_akar_diskriminan / (2 * a_box2))}i \\)
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box2.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 	}
 	else if(khususmin_diskriminan % khususmin_akar_diskriminan != 0 ){
-			hasil_box2.innerHTML = 
+		let perhitungan =
 	`
 	x<sub>1,2</sub> = \\( \\frac{-b \\pm \\sqrt{(b^2 - 4ac))}}{2a} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{-(${b_box2}) \\pm \\sqrt{(${b_box2})^2 - 4.(${a_box2}).(${c_box2})}}{2.(${a_box2})} \\)<br>
-	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + (${-4 * a_box2 * c_box2})}}{${2 * a_box2}} \\)<br>
+	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${b_box2 ** 2} + ${-4 * a_box2 * c_box2}}}{${2 * a_box2}} \\)<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${diskriminan}}}{${2 * a_box2}} \\) <<< tidak ada penyelesaian,karna nilai akar selalu positif<br>
 	x<sub>1,2</sub> = \\( \\frac{${-b_box2} \\pm \\sqrt{${diskriminan}}}{${2 * a_box2}} \\) <<< jika tetap ingin dilanjutkan
 	<br><br>
@@ -624,9 +989,14 @@ else if (diskriminan < 0){
 	<br><br>
 	x<sub>2</sub> = \\( \\frac{${-b_box2} - \\sqrt{${diskriminan}}}{${2 * a_box2}} \\)
 	`
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box2.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 	}
 }}
+function clear_box2(){
+	hasil_box2.innerHTML = "";
+}
 ////////////////////////////////////////////////////////////////
 // box1
 var hasil =  document.getElementById('hasilapoekrpwoarkpa');
@@ -640,13 +1010,17 @@ function hasilfaktor(){
 	let b = Number(inputb.value);	
 	let c = Number(inputc.value);	
 	let hasilaxc = a * c;		
+	if (isNaN(a) || isNaN(b) || isNaN(c)) {
+		return hasil.innerHTML = "angka!";
+	}
 
 	if (hasilaxc < 0) {
     for (let x1 = hasilaxc; x1 <= -hasilaxc + 1; x1++) {
  		let x2 =  hasilaxc / x1;
     	if (hasilaxc / x1 == x2 && x2 + x1 == b) {
-			return hasil.innerHTML = 
-			`ax^2 + bx + c = 0 <br>
+    		let perhitungan = 
+    		`ax^2 + bx + c = 0<br>
+    		${a}x^2 + ${b}x + ${c} = 0<br>
 			a = ${a} , b = ${b} , c = ${c}<br>
 			*rumus pemfaktoran =<br>
 			 x1 + x2 = b<br>
@@ -654,11 +1028,14 @@ function hasilfaktor(){
 			 (x + x1)(x + x2) = 0<br><br>
 			 ${x2} + ${x1} = ${b}<br>
 			 ${x2} x ${x1} = ${hasilaxc}<br>
-			 (x + (${x2}))(x + (${x1})) = 0<br>
-			 x + (${x2}) = 0 ||| x + (${x1}) = 0<br>
-			 x = ${-x2} ||| x = ${-x1}`
+			 (x + ${x2})(x + ${x1}) = 0<br>
+			 ${a}x + ${x2} = 0 ||| ${a}x + ${x1} = 0<br>
+			 x = ${-x2 / a} ||| x = ${-x1 / a}`;
+			perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+			return hasil.innerHTML = perhitungan_replace;
     	} else if (x1 == -hasilaxc + 1) {
 		alert("perhitungan tidak ditemukan, gunakan rumus ABC!")	
+		return hasil.innerHTML = "";
 	}
 	    
     }
@@ -667,8 +1044,9 @@ function hasilfaktor(){
     for (let x1 = -hasilaxc; x1 <= hasilaxc + 1; x1++) {
  		let x2 =  hasilaxc / x1;
     	if (hasilaxc / x1 == x2 && x2 + x1 == b) {
-			return hasil.innerHTML = 
-			`ax^2 + bx + c = 0<br>
+    		let perhitungan = 
+    		`ax^2 + bx + c = 0<br>
+    		${a}x^2 + ${b}x + ${c} = 0<br>
 			a = ${a} , b = ${b} , c = ${c}<br>
 			*rumus pemfaktoran =<br>
 			 x1 + x2 = b<br>
@@ -676,19 +1054,23 @@ function hasilfaktor(){
 			 (x + x1)(x + x2) = 0<br><br>
 			 ${x2} + ${x1} = ${b}<br>
 			 ${x2} x ${x1} = ${hasilaxc}<br>
-			 (x + (${x2}))(x + (${x1})) = 0<br>
-			 x + (${x2}) = 0 ||| x + (${x1}) = 0<br>
-			 x = ${-x2} ||| x = ${-x1}`
+			 (x + ${x2})(x + ${x1}) = 0<br>
+			 ${a}x + ${x2} = 0 ||| ${a}x + ${x1} = 0<br>
+			 x = ${-x2 / a} ||| x = ${-x1 / a}`;
+			perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+			return hasil.innerHTML = perhitungan_replace;
     	} else if (x1 == hasilaxc + 1) {
 		alert("perhitungan tidak ditemukan, gunakan rumus ABC!")
+		return hasil.innerHTML = "";
 	}
     }
     }
     if (hasilaxc == 0) {
     	let x1 = b;
     	let x2 = 0;
-    	return hasil.innerHTML = 
-			`ax^2 + bx + c = 0<br>
+    		let perhitungan = 
+    		`ax^2 + bx + c = 0<br>
+    		${a}x^2 + ${b}x + ${c} = 0<br>
 			a = ${a} , b = ${b} , c = ${c}<br>
 			*rumus pemfaktoran =<br>
 			 x1 + x2 = b<br>
@@ -696,8 +1078,13 @@ function hasilfaktor(){
 			 (x + x1)(x + x2) = 0<br><br>
 			 ${x2} + ${x1} = ${b}<br>
 			 ${x2} x ${x1} = ${hasilaxc}<br>
-			 (x + (${x2}))(x + (${x1})) = 0<br>
-			 x + (${x2}) = 0 ||| x + (${x1}) = 0<br>
-			 x = ${-x2} ||| x = ${-x1}`
+			 (x + ${x2})(x + ${x1}) = 0<br>
+			 ${a}x + ${x2} = 0 ||| ${a}x + ${x1} = 0<br>
+			 x = ${-x2 / a} ||| x = ${-x1 / a}`;
+			perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+			return hasil.innerHTML = perhitungan_replace;
     }
+}
+function clear_box1(){
+	return hasil.innerHTML = "";
 }
