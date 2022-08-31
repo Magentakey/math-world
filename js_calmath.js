@@ -461,7 +461,7 @@ canvas.hidden = false;
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 // canvas grafik!
 ctx.font = "15px arial";
-ctx.fillText("click = x2(responsive)",0,15);
+ctx.fillText("click = x2",0,15);
 
 ctx.beginPath();
 ctx.moveTo(250, 90);
