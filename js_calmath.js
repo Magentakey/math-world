@@ -1,3 +1,271 @@
+const hasil_box8 = document.getElementById('hasil_box8');
+const banyakDataStatiska_box8 = document.getElementById("banyakDataStatiska_box8");
+const kelas_box8 = document.getElementById("kelas_box8");
+const panjang_box8 = document.getElementById("panjang_box8");
+
+// make me global
+let arrData_box8 = "";
+let arrDataString_box8 = "";
+let arrDataStringPlus_box8 = "";
+let nilaiTerkecil_box8 = "";
+let nilaiTerbesar_box8 = "";
+
+function banyakData_box8(){
+	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
+
+	arrData_box8 = [];
+	while(banyakData_box8 > 0){
+		let data_box8 = Number(prompt(`masukan data ke = ${banyakData_box8}`));
+		if(data_box8 == ""){
+			
+		}else{
+			arrData_box8.push(data_box8);
+			banyakData_box8--;
+		}
+	}
+	console.log(arrData_box8);
+
+	arrDataString_box8 = "";
+	for(let i = 0; i < arrData_box8.length; i++){
+		arrDataString_box8 += arrData_box8[i];
+		if((arrData_box8.length - 1) == i){
+
+		}else{
+			arrDataString_box8 += ", ";
+		}
+	}
+
+	nilaiTerkecil_box8 = arrData_box8[0];
+	for(let j = 1 ; j < arrData_box8.length ; j++){
+		if(nilaiTerkecil_box8 > arrData_box8[j]){
+			nilaiTerkecil_box8 = arrData_box8[j];
+		}
+	}
+	nilaiTerbesar_box8 = arrData_box8[0];
+	for(let j = 1 ; j < arrData_box8.length ; j++){
+		if(nilaiTerbesar_box8 < arrData_box8[j]){
+			nilaiTerbesar_box8 = arrData_box8[j];
+		}
+	}
+	perhitungan = 
+	`
+	\\( Data = ${arrDataString_box8} \\)<br>
+	\\( nilai terbesar = ${nilaiTerbesar_box8} \\)<br>
+	\\( nilai terkecil = ${nilaiTerkecil_box8} \\)<br>
+
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box8.innerHTML = perhitungan_replace;
+	MathJax.typeset();
+}
+function run_box8(){
+	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
+	let panjangInt_box8 = Number(panjang_box8.value);
+
+	let arrayFrekuensi = [];
+	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += panjangInt_box8){
+		let banyakFrekuensi = 0;
+		for(let j = 0 ; j < arrData_box8.length ; j++){
+			if(arrData_box8[j] >= i && arrData_box8[j] <= (i + (panjangInt_box8 - 1))){
+				banyakFrekuensi++;
+			}
+		}
+		arrayFrekuensi.push(banyakFrekuensi);
+	}
+	console.log(arrData_box8 + "qweqw");
+	console.log(nilaiTerbesar_box8);
+	console.log(nilaiTerkecil_box8);
+	console.log(arrayFrekuensi);
+	arrFrekuensiString_box8 = "";
+	for(let i = 0; i < arrayFrekuensi.length; i++){
+		arrFrekuensiString_box8 += arrayFrekuensi[i];
+		if((arrayFrekuensi.length - 1) == i){
+
+		}else{
+			arrFrekuensiString_box8 += ", ";
+		}
+	}
+	perhitungan = 
+	`
+	\\( Data frekuensi = ${arrFrekuensiString_box8} \\)<br>
+
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box8.innerHTML += perhitungan_replace;
+	MathJax.typeset();
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+const hasil_box7 = document.getElementById('hasil_box7');
+const banyakDataStatiska_box7 = document.getElementById("banyakDataStatiska");
+
+// make me global
+let arrData_box7 = "";
+let arrDataString_box7 = "";
+let arrDataStringPlus_box7 = "";
+
+function banyakData_box7(){
+	let banyakData_box7 = Number(banyakDataStatiska_box7.value);
+
+	arrData_box7 = [];
+	while(banyakData_box7 > 0){
+		let data_box7 = Number(prompt(`masukan data ke = ${banyakData_box7}`));
+		if(data_box7 == ""){
+			
+		}else{
+			arrData_box7.push(data_box7);
+			banyakData_box7--;
+		}
+	}
+	console.log(arrData_box7);
+
+	arrDataString_box7 = "";
+	for(let i = 0; i < arrData_box7.length; i++){
+		arrDataString_box7 += arrData_box7[i];
+		if((arrData_box7.length - 1) == i){
+
+		}else{
+			arrDataString_box7 += ", ";
+		}
+	}
+
+	let nilaiTerkecil_box7 = arrData_box7[0];
+	for(let j = 1 ; j < arrData_box7.length ; j++){
+		if(nilaiTerkecil_box7 > arrData_box7[j]){
+			nilaiTerkecil_box7 = arrData_box7[j];
+		}
+	}
+	let nilaiTerbesar_box7 = arrData_box7[0];
+	for(let j = 1 ; j < arrData_box7.length ; j++){
+		if(nilaiTerbesar_box7 < arrData_box7[j]){
+			nilaiTerbesar_box7 = arrData_box7[j];
+		}
+	}
+	perhitungan = 
+	`
+	\\( Data = ${arrDataString_box7} \\)<br>
+	\\( nilai terbesar = ${nilaiTerbesar_box7} \\)<br>
+	\\( nilai terkecil = ${nilaiTerkecil_box7} \\)<br>
+
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box7.innerHTML = perhitungan_replace;
+	MathJax.typeset();
+}
+function mean_box7(){
+	console.log(arrData_box7);
+	console.log(arrDataString_box7);
+
+	let arrData2_box7 = arrData_box7.reduce( (t, v) => { return t + v;});
+	console.log(arrData2_box7);
+
+	for(let i = 0; i < arrData_box7.length; i++){
+		arrDataStringPlus_box7 += arrData_box7[i];
+		if((arrData_box7.length - 1) == i){
+
+		}else{
+			arrDataStringPlus_box7 += " + ";
+		}
+	}
+
+	perhitungan = 
+	`
+	\\( mean = \\frac{${arrDataStringPlus_box7}}{${arrData_box7.length}} \\)<br>
+	\\( mean = \\frac{${arrData2_box7}}{${arrData_box7.length}} \\)<br>
+	\\( mean = ${arrData2_box7 / arrData_box7.length} \\)<br>
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box7.innerHTML += perhitungan_replace;
+	MathJax.typeset();
+}
+function median_box7(){
+	console.log(arrData_box7);
+	console.log(arrDataString_box7);
+
+	let arrData2_box7 = arrData_box7;
+	arrData2_box7.sort(function(a, b){return a - b});
+	console.log(arrData2_box7);
+
+	let nilaiTengah_box7 = "";
+	let median_box7 = "";
+	if(arrData2_box7.length % 2 == 0){
+		let temp1_box7 = arrData2_box7.length / 2;
+		let temp2_box7 = (arrData2_box7.length / 2 ) - 1;
+		let nilaiMedian_box7 = (arrData2_box7[temp1_box7] + arrData2_box7[temp2_box7]) / 2;
+		console.log(temp1_box7);
+		console.log(temp2_box7);
+		console.log(nilaiMedian_box7);
+		nilaiTengah_box7 += `${temp1_box7 + 1} and ${temp2_box7 + 1}`;
+		median_box7 = nilaiMedian_box7;
+	}else{
+		let temp1_box7 = (arrData2_box7.length + 1) / 2 ;
+		let temp2arr_box7 = arrData2_box7[temp1_box7 - 1];
+		console.log(temp1_box7);
+		console.log(temp2arr_box7);
+		nilaiTengah_box7 += `${temp1_box7}`;
+		median_box7 = temp2arr_box7;
+	}
+
+	perhitungan = 
+	`
+	\\( median = ${arrData2_box7} \\)<br>
+	\\( *nilai tengah = ${nilaiTengah_box7} \\)<br>
+	\\( median = ${median_box7} \\)<br>
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box7.innerHTML += perhitungan_replace;
+	MathJax.typeset();
+}
+function modus_box7(){
+	console.log(arrData_box7);
+	console.log(arrDataString_box7);
+
+	let arrData2_box7 = arrData_box7;
+	arrData2_box7.sort(function(a, b){return a - b});
+	console.log(arrData2_box7);
+
+	let banyakKemunculanModusArr_box7 = [];
+	let udhPernahMuncul_box7 = new Set([]);
+
+	for (let i = 0; i < arrData2_box7.length; i++) {
+		let banyakKemunculan_box7 = 0;
+		if(udhPernahMuncul_box7.has(arrData2_box7[i])){
+
+		}else{
+			for (let j = 0; j < arrData2_box7.length; j++) {
+				if (arrData2_box7[i] === arrData2_box7[j]) {
+					banyakKemunculan_box7++;
+					udhPernahMuncul_box7.add(arrData2_box7[j]);
+					// arrModus.push(arr[i]);
+				} else {
+			
+				}
+			}
+			banyakKemunculanModusArr_box7.push(banyakKemunculan_box7);
+		}
+	}
+	// 2,4,4,3,5
+	let text_box7 = "";
+	let counter_box7 = 0;
+	for (const x of udhPernahMuncul_box7.values()) {
+		text_box7 += `${x} = ${banyakKemunculanModusArr_box7[counter_box7]}, `;
+		counter_box7++;
+	}
+	
+	let nilaiModusTerbanyak_box7 = banyakKemunculanModusArr_box7[0];
+	for(let i = 1 ; i < banyakKemunculanModusArr_box7 ; i++){
+		if(banyakKemunculanModusArr_box7[i] > nilaiModusTerbanyak_box7){
+			nilaiModusTerbanyak_box7 = banyakKemunculanModusArr_box7[i];
+		}
+	}
+
+	perhitungan = 
+	`
+	\\( modus = ${text_box7} \\)<br>
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box7.innerHTML += perhitungan_replace;
+	MathJax.typeset();
+}
 ////////////////////////////////////////////////////////////////
 const hasil_box6 = document.getElementById('hasil_box6');
 // 3 titik
