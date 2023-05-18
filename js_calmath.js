@@ -10,6 +10,16 @@ let arrDataStringPlus_box8 = "";
 let nilaiTerkecil_box8 = "";
 let nilaiTerbesar_box8 = "";
 
+let nilai_statiska_box8 = "";
+let arrayFrekuensi_box8 = "";
+let xi_statiska_box8 = "";
+let fixi_statiska_box8 = "";
+let arrFrekuensiString_box8 = "";
+let nilaistatiskaString_box8 = "";
+
+let J_box8 = "";
+let k_box8 = "";
+let p_box8 = "";
 function banyakData_box8(){
 	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
 
@@ -47,6 +57,7 @@ function banyakData_box8(){
 			nilaiTerbesar_box8 = arrData_box8[j];
 		}
 	}
+
 	perhitungan = 
 	`
 	\\( Data = ${arrDataString_box8} \\)<br>
@@ -58,37 +69,136 @@ function banyakData_box8(){
 	hasil_box8.innerHTML = perhitungan_replace;
 	MathJax.typeset();
 }
-function run_box8(){
+function runmean_box8(){
 	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
-	let panjangInt_box8 = Number(panjang_box8.value);
+	// let panjangInt_box8 = Number(panjang_box8.value);
 
-	let arrayFrekuensi = [];
-	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += panjangInt_box8){
-		let banyakFrekuensi = 0;
+	// Math.log10(40);
+	J_box8 = nilaiTerbesar_box8 - nilaiTerkecil_box8;
+	k_box8 = Math.ceil(1 + (3.3 * Math.log10(arrData_box8.length)));
+	p_box8 = Math.ceil(J_box8 / k_box8);
+
+	nilai_statiska_box8 = [];
+	arrayFrekuensi_box8 = [];
+	xi_statiska_box8 = [];
+	fixi_statiska_box8 = [];
+	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += p_box8){
+		let banyakFrekuensi_box8 = 0;
 		for(let j = 0 ; j < arrData_box8.length ; j++){
-			if(arrData_box8[j] >= i && arrData_box8[j] <= (i + (panjangInt_box8 - 1))){
-				banyakFrekuensi++;
+			if(arrData_box8[j] >= i && arrData_box8[j] <= (i + (p_box8 - 1))){
+				banyakFrekuensi_box8++;
 			}
 		}
-		arrayFrekuensi.push(banyakFrekuensi);
+		arrayFrekuensi_box8.push(banyakFrekuensi_box8);
+		nilai_statiska_box8.push(`${i} - ${i + (p_box8 - 1)}`);
+		xi_statiska_box8.push(`${(i + i + (p_box8 - 1)) / 2}`);
+		fixi_statiska_box8.push(banyakFrekuensi_box8 * ((i + i + (p_box8 - 1)) / 2));
 	}
+	let himpunanFrekuensi_box8 = arrayFrekuensi_box8.reduce((t, a) => t + a);
+	let himpunanfixi_box8 = fixi_statiska_box8.reduce((t, a) => t + a);
 	console.log(arrData_box8 + "qweqw");
 	console.log(nilaiTerbesar_box8);
 	console.log(nilaiTerkecil_box8);
-	console.log(arrayFrekuensi);
+	console.log(arrayFrekuensi_box8);
 	arrFrekuensiString_box8 = "";
-	for(let i = 0; i < arrayFrekuensi.length; i++){
-		arrFrekuensiString_box8 += arrayFrekuensi[i];
-		if((arrayFrekuensi.length - 1) == i){
+	for(let i = 0; i < arrayFrekuensi_box8.length; i++){
+		arrFrekuensiString_box8 += arrayFrekuensi_box8[i];
+		if((arrayFrekuensi_box8.length - 1) == i){
 
 		}else{
 			arrFrekuensiString_box8 += ", ";
 		}
 	}
+	nilaistatiskaString_box8 = "";
+	for(let i = 0; i < nilai_statiska_box8.length; i++){
+		nilaistatiskaString_box8 += nilai_statiska_box8[i];
+		if((nilai_statiska_box8.length - 1) == i){
+
+		}else{
+			nilaistatiskaString_box8 += ", ";
+		}
+	}
+	xi_statiskaString_box8 = "";
+	for(let i = 0; i < xi_statiska_box8.length; i++){
+		xi_statiskaString_box8 += xi_statiska_box8[i];
+		if((xi_statiska_box8.length - 1) == i){
+
+		}else{
+			xi_statiskaString_box8 += ", ";
+		}
+	}
+	fixi_statiskaString_box8 = "";
+	for(let i = 0; i < fixi_statiska_box8.length; i++){
+		fixi_statiskaString_box8 += fixi_statiska_box8[i];
+		if((fixi_statiska_box8.length - 1) == i){
+
+		}else{
+			fixi_statiskaString_box8 += ", ";
+		}
+	}
+
 	perhitungan = 
 	`
-	\\( Data frekuensi = ${arrFrekuensiString_box8} \\)<br>
+	\\( 1)J = ${nilaiTerbesar_box8} - ${nilaiTerkecil_box8} \\)<br>
+	\\( 1)J = ${nilaiTerbesar_box8 - nilaiTerkecil_box8} \\)<br>
+	\\( 2)k = 1 + 3,3 x log n \\)<br>
+	\\( 2)k = 1 + 3,3 x log ${arrData_box8.length} \\)<br>
+	\\( 2)k = 1 + 3,3 x ${Math.log10(arrData_box8.length)} \\)<br>
+	\\( 2)k = 1 + ${(3.3 * Math.log10(arrData_box8.length))} \\)<br>
+	\\( 2)k = ${1 + (3.3 * Math.log10(arrData_box8.length))} \\)<br>
+	\\( 2)k = ${k_box8} \\)<br>
+	\\( 3)p = \\frac{J}{k} \\)<br>
+	\\( 3)p = \\frac{${J_box8}}{${k_box8}} \\)<br>
+	\\( 3)p = ${J_box8 / k_box8} \\)<br>
+	\\( 3)p = ${Math.ceil(J_box8 / k_box8)} \\)<br>
 
+	\\( Nilai statiska = ${nilaistatiskaString_box8} \\)<br>
+	\\( Data frekuensi(fi) = ${arrFrekuensiString_box8} \\)<br>
+	\\( xi statiska = ${xi_statiskaString_box8} \\)<br>
+	\\( fi.xi statiska = ${fixi_statiskaString_box8} \\)<br>
+
+	\\( himpunan frekuensi(Σfi) = ${himpunanFrekuensi_box8} \\)<br>
+	\\( himpunan fi.xi = ${himpunanfixi_box8} \\)<br>
+	\\( mean = \\frac{Σfi.xi}{Σfi} \\)<br>
+	\\( mean = \\frac{${himpunanfixi_box8}}{${himpunanFrekuensi_box8}} \\)<br>
+	\\( mean = ${himpunanfixi_box8 / himpunanFrekuensi_box8} \\)<br>
+
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box8.innerHTML += perhitungan_replace;
+	MathJax.typeset();
+}
+function runmedian_box8(){
+	let Frekuensi_box8 = [];
+	let fk_box8 = [];
+	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += p_box8){
+		let banyakFrekuensi_box8 = 0;
+		for(let j = 0 ; j < arrData_box8.length ; j++){
+			if(arrData_box8[j] >= i && arrData_box8[j] <= (i + (p_box8 - 1))){
+				banyakFrekuensi_box8++;
+			}
+		}
+		// arrayFrekuensi_box8.push(banyakFrekuensi_box8);
+		Frekuensi_box8.push(banyakFrekuensi_box8);
+		let patokanfk = Frekuensi_box8.reduce((t, a) => t + a);
+		fk_box8.push(patokanfk);
+	}
+
+	fk_statiskaString_box8 = "";
+	for(let i = 0; i < fk_box8.length; i++){
+		fk_statiskaString_box8 += fk_box8[i];
+		if((fk_box8.length - 1) == i){
+
+		}else{
+			fk_statiskaString_box8 += ", ";
+		}
+	}
+	perhitungan = 
+	`
+
+	\\( Nilai statiska = ${nilaistatiskaString_box8} \\)<br>
+	\\( Data frekuensi(fi) = ${arrFrekuensiString_box8} \\)<br>
+	\\( fk <= statiska = ${fk_statiskaString_box8} \\)<br>
 	`;
 	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
 	hasil_box8.innerHTML += perhitungan_replace;
