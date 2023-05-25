@@ -2,6 +2,7 @@ const hasil_box8 = document.getElementById('hasil_box8');
 const banyakDataStatiska_box8 = document.getElementById("banyakDataStatiska_box8");
 const kelas_box8 = document.getElementById("kelas_box8");
 const panjang_box8 = document.getElementById("panjang_box8");
+const quartil_box8 = document.getElementById("quartil_box8");
 
 // make me global
 let arrData_box8 = "";
@@ -16,10 +17,16 @@ let xi_statiska_box8 = "";
 let fixi_statiska_box8 = "";
 let arrFrekuensiString_box8 = "";
 let nilaistatiskaString_box8 = "";
+let nilaiTerkecilFrekuensi_box8 = "";
+let nilaiTerbesarFrekuensi_box8 = "";
 
 let J_box8 = "";
 let k_box8 = "";
 let p_box8 = "";
+let indexNilaiTerbesar_box8 = 0;
+let indexNilaiTerkecil_box8 = 0;
+let indexnilaiTerbesarFrekuensi_box8 = 0;
+let indexnilaiTerkecilFrekuensi_box8 = 0;
 function banyakData_box8(){
 	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
 
@@ -70,6 +77,7 @@ function banyakData_box8(){
 	MathJax.typeset();
 }
 function runmean_box8(){
+
 	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
 	// let panjangInt_box8 = Number(panjang_box8.value);
 
@@ -169,8 +177,15 @@ function runmean_box8(){
 	MathJax.typeset();
 }
 function runmedian_box8(){
+	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
+	let quartill_box8 = Number(quartil_box8.value);
+
+	let quartil2_box8 = quartill_box8 / 4;
+	let setengahn_nox8 = quartil2_box8 * banyakData_box8;
+	let Fk_datake_box8 = 0;
 	let Frekuensi_box8 = [];
 	let fk_box8 = [];
+	let Tb_box8 = [];
 	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += p_box8){
 		let banyakFrekuensi_box8 = 0;
 		for(let j = 0 ; j < arrData_box8.length ; j++){
@@ -182,6 +197,10 @@ function runmedian_box8(){
 		Frekuensi_box8.push(banyakFrekuensi_box8);
 		let patokanfk = Frekuensi_box8.reduce((t, a) => t + a);
 		fk_box8.push(patokanfk);
+		Tb_box8.push(i);
+		if(patokanfk < setengahn_nox8){
+			Fk_datake_box8++;
+		}
 	}
 
 	fk_statiskaString_box8 = "";
@@ -195,10 +214,70 @@ function runmedian_box8(){
 	}
 	perhitungan = 
 	`
-
+	--------------------------------------------------------<br>
 	\\( Nilai statiska = ${nilaistatiskaString_box8} \\)<br>
 	\\( Data frekuensi(fi) = ${arrFrekuensiString_box8} \\)<br>
 	\\( fk <= statiska = ${fk_statiskaString_box8} \\)<br>
+	
+	\\( kuantil = Q${quartill_box8} \\)<br>
+	\\( kuantil = \\frac{${quartill_box8}}{4} \\)<br>
+	\\( kuantil = ${quartil2_box8} \\)<br>
+	
+	\\( ${quartil2_box8}n = ${quartil2_box8} . ${banyakData_box8} = ${quartil2_box8 * banyakData_box8}  \\)<br>
+	\\( me = Tb + (\\frac{${quartil2_box8}n - Fk}{Fme})p \\)<br>
+	\\( me = ${Tb_box8[Fk_datake_box8] - 0.5} + (\\frac{${quartil2_box8} . ${banyakData_box8} - ${fk_box8[Fk_datake_box8 - 1]}}{${Frekuensi_box8[Fk_datake_box8]}})${p_box8} \\)<br>
+	\\( me = ${Tb_box8[Fk_datake_box8] - 0.5} + (\\frac{${quartil2_box8 * banyakData_box8} - ${fk_box8[Fk_datake_box8 - 1]}}{${Frekuensi_box8[Fk_datake_box8]}})${p_box8} \\)<br>
+	\\( me = ${Tb_box8[Fk_datake_box8] - 0.5} + (\\frac{${(quartil2_box8 * banyakData_box8) - fk_box8[Fk_datake_box8 - 1]}}{${Frekuensi_box8[Fk_datake_box8]}})${p_box8} \\)<br>
+	\\( me = ${Tb_box8[Fk_datake_box8] - 0.5} + (\\frac{${((quartil2_box8 * banyakData_box8) - fk_box8[Fk_datake_box8 - 1]) * p_box8}}{${Frekuensi_box8[Fk_datake_box8]}}) \\)<br>
+	\\( me = ${Tb_box8[Fk_datake_box8] - 0.5} + ${(((quartil2_box8 * banyakData_box8) - fk_box8[Fk_datake_box8 - 1]) * p_box8) / (Frekuensi_box8[Fk_datake_box8])} \\)<br>
+	\\( me = ${(Tb_box8[Fk_datake_box8] - 0.5) + ((((quartil2_box8 * banyakData_box8) - fk_box8[Fk_datake_box8 - 1]) * p_box8) / (Frekuensi_box8[Fk_datake_box8]))} \\)<br>
+	`;
+	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
+	hasil_box8.innerHTML += perhitungan_replace;
+	MathJax.typeset();
+}
+function runmodus_box8(){
+	let banyakData_box8 = Number(banyakDataStatiska_box8.value);
+
+	let Frekuensi_box8 = [];
+	let Tb_box8 = [];
+	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += p_box8){
+		let banyakFrekuensi_box8 = 0;
+		for(let j = 0 ; j < arrData_box8.length ; j++){
+			if(arrData_box8[j] >= i && arrData_box8[j] <= (i + (p_box8 - 1))){
+				banyakFrekuensi_box8++;
+			}
+		}
+		Frekuensi_box8.push(banyakFrekuensi_box8);
+		Tb_box8.push(i);
+	}
+
+	nilaiTerkecilFrekuensi_box8 = Frekuensi_box8[0];
+	indexnilaiTerkecilFrekuensi_box8 = 0;
+	for(let j = 1 ; j < Frekuensi_box8.length ; j++){
+		if(nilaiTerkecilFrekuensi_box8 > Frekuensi_box8[j]){
+			nilaiTerkecilFrekuensi_box8 = Frekuensi_box8[j];
+			indexnilaiTerkecilFrekuensi_box8 = j;
+		}
+	}
+	nilaiTerbesarFrekuensi_box8 = Frekuensi_box8[0];
+	indexnilaiTerbesarFrekuensi_box8 = 0;
+	for(let j = 1 ; j < Frekuensi_box8.length ; j++){
+		if(nilaiTerbesarFrekuensi_box8 < Frekuensi_box8[j]){
+			nilaiTerbesarFrekuensi_box8 = Frekuensi_box8[j];
+			indexnilaiTerbesarFrekuensi_box8 = j;
+		}
+	}
+	
+	perhitungan = 
+	`
+	--------------------------------------------------------<br>
+	\\( modus data berkelompok = tb + (\\frac{d1}{d1 + d2})p \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]} + ${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]}})${p_box8} \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1] + Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]}})${p_box8} \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${(Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1] + Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]}}) \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + ${((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8) / ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) + (Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]))} \\)<br>
+	\\( mo = ${(Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5) + ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8) / ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) + (Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]))} \\)<br>
 	`;
 	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
 	hasil_box8.innerHTML += perhitungan_replace;
