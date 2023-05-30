@@ -90,6 +90,7 @@ function runmean_box8(){
 	arrayFrekuensi_box8 = [];
 	xi_statiska_box8 = [];
 	fixi_statiska_box8 = [];
+	let fk_box8 = [];
 	for(let i = nilaiTerkecil_box8 ; i < nilaiTerbesar_box8 ; i += p_box8){
 		let banyakFrekuensi_box8 = 0;
 		for(let j = 0 ; j < arrData_box8.length ; j++){
@@ -101,6 +102,8 @@ function runmean_box8(){
 		nilai_statiska_box8.push(`${i} - ${i + (p_box8 - 1)}`);
 		xi_statiska_box8.push(`${(i + i + (p_box8 - 1)) / 2}`);
 		fixi_statiska_box8.push(banyakFrekuensi_box8 * ((i + i + (p_box8 - 1)) / 2));
+		let patokanfk = arrayFrekuensi_box8.reduce((t, a) => t + a);
+		fk_box8.push(patokanfk);
 	}
 	let himpunanFrekuensi_box8 = arrayFrekuensi_box8.reduce((t, a) => t + a);
 	let himpunanfixi_box8 = fixi_statiska_box8.reduce((t, a) => t + a);
@@ -164,13 +167,42 @@ function runmean_box8(){
 	\\( Data frekuensi(fi) = ${arrFrekuensiString_box8} \\)<br>
 	\\( xi statiska = ${xi_statiskaString_box8} \\)<br>
 	\\( fi.xi statiska = ${fixi_statiskaString_box8} \\)<br>
+	<table border="1" style="border-collapse: collapse;">
+	<tr>
+	<th>nilai</th>
+	<th>frekuensi(fi)</th>
+	<th>xi</th>
+	<th>fi.xi</th>
+	<th>fk</th>
+	</tr>
+	`;
+	let trTableBuka = "";
+	let trTableTutup = "";
+	let thTable = "";
+	let tableData = "";
+	for(let i = 0 ; i < arrayFrekuensi_box8.length; i++){
+		trTableBuka = `<tr>`;
+		thTable = `<th>${nilai_statiska_box8[i]}</th>`;
+		thTable += `<th>${arrayFrekuensi_box8[i]}</th>`;
+		thTable += `<th>${xi_statiska_box8[i]}</th>`;
+		thTable += `<th>${fixi_statiska_box8[i]}</th>`;
+		thTable += `<th>${fk_box8[i]}</th>`;
+		trTableTutup = `</tr>`;
+		tableData += `${trTableBuka}${thTable}${trTableTutup}`;
+	}
+	perhitungan += 
+	`
+	${tableData}
+	`;
 
+	perhitungan += 
+	`
+	</table>
 	\\( himpunan frekuensi(Σfi) = ${himpunanFrekuensi_box8} \\)<br>
 	\\( himpunan fi.xi = ${himpunanfixi_box8} \\)<br>
 	\\( mean = \\frac{Σfi.xi}{Σfi} \\)<br>
 	\\( mean = \\frac{${himpunanfixi_box8}}{${himpunanFrekuensi_box8}} \\)<br>
 	\\( mean = ${himpunanfixi_box8 / himpunanFrekuensi_box8} \\)<br>
-
 	`;
 	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
 	hasil_box8.innerHTML += perhitungan_replace;
@@ -273,11 +305,11 @@ function runmodus_box8(){
 	`
 	--------------------------------------------------------<br>
 	\\( modus data berkelompok = tb + (\\frac{d1}{d1 + d2})p \\)<br>
-	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]} + ${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]}})${p_box8} \\)<br>
-	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1] + Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]}})${p_box8} \\)<br>
-	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${(Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1] + Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]}}) \\)<br>
-	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + ${((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8) / ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) + (Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]))} \\)<br>
-	\\( mo = ${(Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5) + ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8) / ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) + (Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8]))} \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]} + ${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 + 1]}})${p_box8} \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1] + Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 + 1]}})${p_box8} \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + (\\frac{${(Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8}}{${Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1] + Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 + 1]}}) \\)<br>
+	\\( mo = ${Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5} + ${((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8) / ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) + (Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 + 1]))} \\)<br>
+	\\( mo = ${(Tb_box8[indexnilaiTerbesarFrekuensi_box8] - 0.5) + ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) * p_box8) / ((Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 - 1]) + (Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8] - Frekuensi_box8[indexnilaiTerbesarFrekuensi_box8 + 1]))} \\)<br>
 	`;
 	perhitungan_replace = perhitungan.replace(/[+] -/g, "- ").replace(/- [+]/g, "- ").replace(/- -/g, "+ ").replace(/ 1x/g, "x").replace(/ -1x/g, "-x").replace(/ 0x [+]/g, "").replace(/ 0x -/g, "").replace(/ 0x<sup>2<[/]sup> [+]/g, "").replace(/ 0x<sup>2<[/]sup> -/g, "").replace(/ 1a/g, "a").replace(/ -1a/g, "-a").replace(/ 0a [+]/g, "").replace(/ 0a -/g, "").replace(/ 1b/g, "b").replace(/ -1b/g, "-b").replace(/ 0b [+]/g, "").replace(/ 0b -/g, "").replace(/ 1c/g, "c").replace(/ -1c/g, "-c").replace(/ 0c [+]/g, "").replace(/ 0c -/g, "").replace(/[+] 0 /g, "").replace(/- 0 /g, "");
 	hasil_box8.innerHTML += perhitungan_replace;
